@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 const beliefs = [
   {
     title: "God and Salvation",
-    text: "We believe the Scriptures are divinely inspired, revealing God's plan for mankind. We affirm the existence of one true God in three persons—the Father, Son, and Holy Spirit—and the deity of Jesus Christ. We believe that through faith in Christ, salvation is available, restoring fellowship with God.",
+    text: "We believe the Scriptures are divinely inspired, revealing God&apos;s plan for mankind. We affirm the existence of one true God in three persons&mdash;the Father, Son, and Holy Spirit&mdash;and the deity of Jesus Christ. We believe that through faith in Christ, salvation is available, restoring fellowship with God.",
   },
   {
     title: "Ordinances and the Holy Spirit",
@@ -18,17 +18,18 @@ const beliefs = [
   },
   {
     title: "Sanctification and Church Mission",
-    text: "Sanctification is both an initial and ongoing process, where believers grow in holiness and Christ-likeness. The Church's mission is to seek and save the lost, with leadership committed to worship, service, and meeting human needs.",
+    text: "Sanctification is both an initial and ongoing process, where believers grow in holiness and Christ-likeness. The Church&apos;s mission is to seek and save the lost, with leadership committed to worship, service, and meeting human needs.",
   },
   {
     title: "Healing and the Blessed Hope",
-    text: "Divine healing is a privilege for Christians today, provided through Christ's atonement. We eagerly await the return of Jesus, when He will rapture His church, and believers will be with Him forever in glory.",
+    text: "Divine healing is a privilege for Christians today, provided through Christ&apos;s atonement. We eagerly await the return of Jesus, when He will rapture His church, and believers will be with Him forever in glory.",
   },
   {
-    title: "Eternal Destiny and Christ's Reign",
+    title: "Eternal Destiny and Christ's Reign",// eslint-disable-next-line react/no-unescaped-entities
     text: "We believe in the Millennial Reign of Christ, His rule over earth for 1,000 years. Ultimately, those who reject Christ will face judgment, while believers will dwell forever with Him in the new heavens and earth.",
   },
 ];
+
 
 const OurBeliefs = () => {
   const [showBeliefs, setShowBeliefs] = useState(false);
