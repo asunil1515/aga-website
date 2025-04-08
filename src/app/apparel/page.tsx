@@ -52,7 +52,5 @@ export default function ApparelPage() {
     </>
   );
 }
-    function setIsLoading(arg0: boolean) {
-      throw new Error("Function not implemented.");
-    }
+
 
