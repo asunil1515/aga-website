@@ -29,7 +29,7 @@ const beliefs = [
     text: "We believe in the Millennial Reign of Christ, His rule over earth for 1,000 years. Ultimately, those who reject Christ will face judgment, while believers will dwell forever with Him in the new heavens and earth.",
   },
 ];
-
+//
 
 const OurBeliefs = () => {
   const [showBeliefs, setShowBeliefs] = useState(false);
