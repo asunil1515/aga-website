@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+/*import React, { useState } from "react";*/
 import Image from "next/image";
 import { useBag } from "../components/Bag";
 import Navbar from "../components/Navbar";

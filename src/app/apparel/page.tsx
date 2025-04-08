@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import MainContent from "../ap-components/MainContent";
 import IntroScreen from "../ap-components/Intropg";
 
-function useScrollLock() {
+/*function useScrollLock() {
   const [isLocked, setIsLocked] = useState(false);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function useScrollLock() {
       document.body.style.paddingRight = '0px';
     }
   }, [isLocked]);
-}
+}*/
 
 export default function ApparelPage() {
   const [showMainContent, setShowMainContent] = useState(false);

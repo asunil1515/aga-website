@@ -9,12 +9,13 @@ import { BagSimple, CaretDown, CaretLeft } from '@phosphor-icons/react/dist/ssr'
 /*import { useBag } from '../components/Bag';*/
 import { motion } from 'framer-motion';
 
-const sizes = [
+/* const sizes = [
   { name: 'Medium', price: '$20' },
   { name: 'Large', price: '$20' },
   { name: 'XL', price: '$20' },
   { name: '2XL', price: '$40' },
-];
+]; */
+
 
 const images = [
   '/shirt1.png',
@@ -140,7 +141,7 @@ const YHWHshirtpage = () => {
               <p>
                 One shirt, to glorify one name. This tee, inspired by The
                 Burning Bush in Exodus 3, highlights the moment God reveals His
-                name, YHWH—"I AM WHO I AM." The design reflects the power of
+                name, YHWH—&quot;I AM WHO I AM.&quot; The design reflects the power of
                 YHWH, the divine identity that calls, sustains, and leads.
               </p>
               {showFullDescription && (

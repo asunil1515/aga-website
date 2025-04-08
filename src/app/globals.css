@@ -2048,7 +2048,7 @@ scrollbar-track {
   font-family: var(--heading-font);
   font-size: clamp(1.8rem, 5vw, 2.2rem);
   font-weight: 700;
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center;
 }
 .main-content p {

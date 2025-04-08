@@ -183,9 +183,9 @@ const CheckoutPage = () => {
                     <RadioGroup.Option
                       key={method.value}
                       value={method}
-                      className={({ checked }) => `
+                    /*  className={({ checked }) => `
                         shipping-method-group
-                      `}
+                      `}*/
                     >
                       {({ checked }) => (
                         <div className="flex w-full items-center justify-between">
@@ -358,7 +358,7 @@ const CheckoutPage = () => {
               <h3>Order Summary</h3>
               <div className="summary-details">
                 <div className="item">
-                  <img
+                  <Image
                     src="/shirt1.png"
                     alt="Item Image"
                     width={300}
