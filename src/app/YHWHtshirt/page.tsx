@@ -146,7 +146,7 @@ const YHWHshirtpage = () => {
               </p>
               {showFullDescription && (
                 <p>
-                  This is more than just a t-shirt, it's a conversation starter.
+                  This is more than just a t-shirt, it&apos;s a conversation starter.
                   He is still the same God that Moses encountered. Rep your God
                   boldly. Let it be a reminder that every moment is an
                   opportunity to release His presence, bringing hope, healing,
@@ -172,7 +172,7 @@ const YHWHshirtpage = () => {
 
               {showShippingDetails && (
                 <p className="collapsible-content">
-                  Shipping is $5. However, if you're attending the Worship Night on April 26th, you can opt for free pickup at the event.
+                  Shipping is $5. However, if you&apos;re attending the Worship Night on April 26th, you can opt for free pickup at the event.
                 </p>
               )}
             </div>
