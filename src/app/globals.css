@@ -1,26 +1,3346 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&display=swap");
 @import "tailwindcss";
+@import "@radix-ui/themes/styles.css";
 
+/* Root Variables for Consistency */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --dark-bg: #192d2c; /* Dark background color */
+  --light-bg: #f0f0f0ee; /* Light background color */
+  --accent-color: #bd9b57; /* Gold-ish accent */
+  --off-black: #0c0c0c;
+  --dark-gray: #212124;
+  --hp-button-color: #7e7b75; /* Dark gray button */
+  --hp-button-hover: #6d6a65; /* Darker gray on hover */
+  --gray-button-color: rgb(212, 210, 205);
+  --gray-button-hover: rgba(255, 255, 255, 0.342);
+  --text-color: #ffffff; /* White text on dark bg */
+  --heading-font: "Montserrat", serif;
+  --body-font: "Montserrat", sans-serif;
+  --cursive-font: "Ballet";
+  --p-font-size: 0.85rem; /* Default font size */
+  --mobile-p-font-size: 0.7rem; /* Mobile font size */
+  --mobile-h3-font-size: 1.2rem;
+  --mobile-h3-margin-top: 0.75rem;
+  --mobile-h3-margin-bottom: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Reset & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+}
+body {
+  font-family: var(--body-font);
+  background-color: var(--off-black);
+  color: var(--text-color);
+}
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;  /* Vertical scrollbar width */
+  height: 12px; /* Horizontal scrollbar height */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+::-webkit-scrollbar-thumb {
+  background-color: var(--hp-button-color); /* Custom color for the thumb */
+  border-radius: 9px; /* Round the thumb corners */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--dark-gray); /* Background color of the track */
+}
+/* Smooth scrolling for all scrollable content */
+html {
+  scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+}
+/* For Firefox */
+scrollbar {
+  width: 12px;
+}
+scrollbar-thumb {
+  background-color: #7e7b75;
+  border-radius: 6px;
+}
+scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+
+/* Navbar */
+.navbar {
+  background-color: transparent;
+  padding: 1.25rem 1rem; /* Reduced padding */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Navbar when scrolled */
+.navbar.scrolled {
+  background-color: rgba(12, 12, 12, 0.97);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar Content */
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1400px;
+   /* Reduced padding */
+}
+
+/* Nav Menu */
+.nav-menu {
+  display: flex;
+  gap: 1.85rem; /* Reduced gap between menu items */
+  list-style: none;
+  margin: 0;
+  padding: 0rem;
+}
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem; /* Reduced font size */
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.nav-menu a:hover {
+  color: gray;
+  transform: translateY(-9px); /* 👈 smooth rise */
+}
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 1.65rem; /* Reduced gap between social icons */
+}
+.social-icon {
+  display: flex;
+  align-items: center;
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-icon .y1{
+  transform: translateY(-0.8px);
+}
+.social-icon .i1{
+  transform: translateY(1.75px);
+}
+.social-icon:hover {
+  color: gray;
+  transform: translateY(0px); /* 👈 lift effect */
+}
+/* Shopping Bag Icon */
+.bag-item-count {
+  position: absolute;
+  top: 0.5rem;
+  right: -0.75rem;
+  background-color: rgb(248, 248, 239);
+  color: black;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem; /* Smaller font size */
+  font-weight: 650;
+  border: 2px solid rgb(88, 88, 88);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 1025px) {
+  .navbar-opaque {
+    color: black !important;
+    transition: all 0.3s ease-in-out;
+    z-index: 10000;
+  }
+  
+  .navbar-opaque .nav-menu a {
+    color: black !important;
+    font-weight: 480;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-opaque .nav-menu a:hover {
+    color: rgb(199, 199, 199) !important;
+  }
+  
+  .navbar-opaque.scrolled {
+    background-color: rgba(12, 12, 12, 0.97);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .navbar-opaque.scrolled .nav-menu a {
+    color: white !important;
+  }
+  
+  .navbar-opaque.scrolled .nav-menu a:hover {
+    color: rgb(145, 145, 145) !important;
+  }
+  
+  .navbar-opaque.scrolled .social-icon {
+    color: var(--hp-button-hover) !important;
+  }
+  
+  .navbar-opaque.scrolled .social-icon:hover {
+    color: var(--hp-button-hover) !important;
+  }
+}
+@media (max-width: 1024px) {
+  
+  .navbar-content {
+    position: fixed;        /* Sticks it to the top */
+    top: 0;                 /* Places it at the very top */
+    left: 0;                /* Ensures it starts from the left */
+    width: 100%;            /* Makes it full width */
+    height: 6rem;           /* Adjusted height for the navbar */
+    z-index: 999;
+    background-color: transparent; /* Ensure the background is transparent */
+    transition: top 0.3s, background-color 0.3s; /* Smooth transition for sliding and background color */
+  }
+  .navbar.scrolled {
+    background-color: transparent; /* Ensure the navbar background becomes transparent */
+    top: -6rem; /* Hide navbar when scrolling down */
+    box-shadow: none;
+  }
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--off-black); /* Background color set to black */
+    border: none;
+    color: white;
+    font-size: 2rem; /* Adjust the font size of the hamburger */
+    cursor: pointer;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0.5rem; /* Add padding around the hamburger icon */
+    border-radius: 5px; /* Optional: rounded corners for the button */
+    z-index: 1000; /* Ensure it stays above other elements */
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem; /* Changed from left to right */
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+  }
+
+  /* Hide Desktop Nav Menu */
+  .nav-menu {
+    display: none;
+  }
+  /* Mobile Menu Active */
+  .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: clamp(4rem,70vw,25rem); /* Takes 70% of screen width */
+    height: 100%; /* Full screen height */
+    background: rgba(12, 12, 12, 0.97); /* Dark background for the mobile menu */
+    padding: 6rem 2rem 2rem;
+    text-align: left;
+    gap: 1rem;
+  }
+
+  .nav-menu.active a {
+    margin-top: 1;
+    padding: 0.5rem 0;
+    font-size: clamp(0.5rem, 5.5vw, 1.5rem); /* Slightly smaller font size */
+  }
+
+  .nav-menu.active .social-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem; /* Reduced gap between social icons */
+    margin-top: 0rem; /* Adjust spacing from menu items */
+ /* Enlarge icons to 2.5rem */
+  }
+
+  .nav-menu.active .bag-section a {
+    color: white !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-menu.active .bag-section a:hover {
+    color: rgb(199, 199, 199) !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Hide Mobile Menu Button on Desktop */
+@media (min-width: 1025px) {
+  .menu-toggle, .menu-close {
+    display: none !important;
+  }
+}
+
+
+/* Hero Content */
+.hero {
+  min-height: 100vh; /* Fixed height */
+  max-height: 70rem;
+  position: relative; /* Ensures that absolute elements inside are positioned relative to this */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Hero Background */
+.hero-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Keeps the background behind the content */
+}
+
+/* Hero Content */
+/* Hero Content */
+.hero .content {
+  position: relative; /* Ensures content stays above the background */
+  z-index: 1;
+  padding: 2rem;
+  width: 100%; /* Max width for the content */
+  max-width: 1800px;
+}
+
+/* Hero h1 */
+/* Hero h1 */
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 720;
+  margin-bottom: 2rem;
+  display: block; /* Block for full width */
+  line-height: 1.11;
+  letter-spacing: 0.3px;
+  position: relative; /* Make the h1 relative for absolute positioning of child elements */
+  width: 100%; /* Ensure h1 takes up full width */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; /* No restrictions on h1 width */
+}
+
+/* Hero h1 minus-icon */
+.hero h1 .minus-icon {
+  display: block;
+  background-color: rgb(255, 255, 255); /* Line color */
+  width: 100%; /* This will stretch the line to match the h1 width */
+  max-width: 505px; /* Limits width of the line */
+  height: 2.1px; /* Line thickness */
+  position: absolute; /* Position relative to h1 *//* Slightly below the h1 text */
+  left: 50%; /* Position at the center horizontally */
+  transform: translateX(-50%)translateY(1.2rem); /* Center horizontally */
+  transition: width 1.0s ease-out;
+}
+/* Hero Paragraph */
+.hero p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 2.1rem;
+  max-width: 500px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Hero Button */
+.hero-button {
+  position: relative;
+  white-space: nowrap;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  background-color: #7e7b75;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+/* Hero Button Hover */
+.hero-button:hover {
+  background-color: #6d6a65;
+}
+
+/* Mobile (Less than 1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    height: 101vh; /* Reduce height for mobile */
+    display: flex;
+    flex-direction: column; /* Align content vertically */
+    justify-content: center; /* Center content vertically */
+    text-align: center; /* Ensure everything is centered */
+  }
+  .hero-bg {
+    position: absolute; /* Fill the entire section */
+    top: 0; /* Align at the top */
+    left: 0; /* Align to the left */
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Put it behind content */
+    overflow: hidden; /* Ensure no background overflow */
+  }
+  .hero h1 {
+    font-size: clamp(1.5rem, 7.5vw, 3.0rem);
+    margin-bottom: 1rem;
+  }
+  .hero h1 .minus-icon {
+    display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center;      /* Vertically center */
+    transform: translate(-50%, 380%); /* Adjust vertical and horizontal positioning */
+    height: 2px;              /* Slightly thinner for mobile */
+    max-width: clamp(5rem, 69vw, 27.25rem); /* Set max width */
+  }
+  .hero p {
+    font-size: clamp(0.5rem, 2.8vw, 0.9rem);
+    margin-bottom: 1rem; /* Space between paragraph and button */
+    margin: 0 auto 0.8rem; /* Adjust spacing and center text */
+  }
+  .hero-button {
+    padding: 0.5rem 1.3rem;
+    font-size: 0.75rem; /* Slightly larger font size */
+    margin-top: 1.5rem; /* Bring the button closer to the paragraph */
+  }
+}
+
+/* Sermons Section */
+.sermons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--off-black);
+  color: white;
+  height: clamp(20rem, 50vh, 65rem); /* Responsive height */
+  max-height: 70rem;
+  position: relative;
+  flex-wrap: wrap; /* Allows stacking on small screens */
+  gap: 0; /* No gap between the items */
+}
+/* Video Styling */
+.sermons iframe {
+  border-radius: 10px;
+  position: relative;
+  flex: 1; /* Allow iframe to grow/shrink equally */
+  max-width: 540px;
+  aspect-ratio: 16 / 9;
+  border: none;
+  z-index: 3;
+  margin-right: -3.8rem; /* Negative margin to make it overlay over the sermon text */
+  top: -2rem; /* Raises the video slightly */
+}
+/* Sermon Text Box */
+.sermon-text {
+  border-radius: 10px;
+  background-color: var(--light-bg);
+  position: relative;
+  padding: 3.24rem 3rem;
+  flex: 1; /* Allow sermon text box to grow/shrink equally */
+  max-height: 304px;
+  max-width: 540px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures even spacing between content */
+  top: 1.5rem; /* Keeps sermon text in place */
+}
+/* Sermon Title */
+.sermon-text h2 {
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  margin-left: 3.5rem;
+}
+/* Sermon Description */
+.sermon-text p {
+  margin-left: 3.5rem;
+  font-size: clamp(0.5rem,2vw,0.9rem);
+  margin-top: 1rem;
+  color: #666;
+}
+/* Sermon Button */
+.sermon-text a {
+  margin-left: 3.5rem;
+  background-color: #7e7b75;
+  border-radius: 5px;
+  font-size: 0.74rem;
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 1rem; /* Space from the content above */
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
+/* Button Hover Effect */
+.sermon-text a:hover {
+  background-color: #64615f;
+}
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .sermons {
+    height: clamp(33.25rem, 70.0vh, 38rem); /* Ensure it takes full height of the viewport */
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    padding: 0; /* Reduced padding for a more compact layout */
+  }
+  .sermons iframe {
+    width: clamp(10rem,80vw,28rem); /* Make the iframe take up less space */
+    max-height: clamp(0.5rem,27.5vh,15rem); /* Reduce the max width of the video */
+    /* Maintain the 16:9 aspect ratio */
+    margin-bottom: -1rem; /* gap */
+    border-radius: 10px; /* Smaller border radius */
+    border: none; /* Optional: Remove border */ /* Reset any offset */
+    display: block; /* Ensure it's treated as a block element */
+    margin-top: 1.5rem;
+    margin-left: auto; /* Centers the iframe horizontally */
+    margin-right: auto; /* Centers the iframe horizontally */
+  }
+  
+  .sermon-text {
+    width: clamp(10rem,80vw,28rem); /* Reduce max width of the text box */
+    height: auto; /* Let the content define the height */
+    min-height: 200px; /* Ensure the box is at least 200px tall */
+    max-height: 230px; /* Prevent the box from growing taller than 400px */
+    padding: 0.1rem; /* Reduced padding inside the text box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for separation */
+    margin-bottom: 1rem; /* Space between text box and button */
+  }
+  .sermon-text h2 {
+    margin-left: auto; /* Centers the title horizontally */
+    margin-right: auto;
+    font-size: 1rem; /* Scale down the title */
+    margin-top: 1rem; /* Space between title and description */
+  }
+  
+  .sermon-text p {
+    width: 100%; /* Ensure it's responsive */
+    max-width: 80%; /* Reduce max width of the text box */
+    margin-top: 0.5rem; /* Adjust the top margin to move text up */
+    font-size: clamp(0.5rem, 3.1vw, 0.85rem); /* Scale down the description */
+    margin-left: auto; /* Centers the paragraph horizontally */
+    margin-right: auto; /* Centers the paragraph horizontally */
+    margin-bottom: 1.25rem; /* Add space between the text and the button */
+    text-align: center; /* Ensure the text inside the paragraph is centered */
+  }
+  
+  .sermon-text a {
+    width: 50%; /* Make the button span the full width of the text box */
+    margin-top: 0rem; /* Move the button up */
+    margin-bottom: 1rem;
+    margin-left: auto; /* Centers the button horizontally */
+    margin-right: auto; /* Centers the button horizontally */
+    display: block; /* Ensure the button behaves like a block element */
+    text-align: center; /* Centers the text inside the button */
+    padding: 0.75rem; /* Adjust padding to be smaller for compact layout */
+    width: clamp(1rem,35vw,8rem);
+    font-size: clamp(1rem, --mobile-p-font-size, 2rem); /* Reduce font size of the button */
+  }
+}
+
+
+.about-what-to-expect {
+  background-color: var(--light-bg); 
+  background-size: cover;
+  background-position: center;
+  color: #131313;
+  padding: 5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  max-width: 1900px;
+  width: 100%;
+}
+.about-left,
+.about-right {
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+}
+/* Header Spacing */
+.about-left h3 {
+  margin-top: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+.about-right h3 {
+  margin-top: 0rem;
+  margin-bottom: 0.75rem;
+}
+/* Paragraph Spacing */
+.about-left p {
+  margin-bottom: 0rem;
+}
+.about-right p {
+  margin-bottom: 0.57rem;
+}
+/* Button Spacing */
+.about-left .about-button {
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+}
+.about-right .about-button {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.about-image {
+  width: 100%;
+  max-width: 380px; /* Constrain image width */
+  height: auto;
+  margin-top: 0.45rem;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.about-what-to-expect h3 {
+  font-family: var(--heading-font);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.about-what-to-expect p {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.6;
+  width: 100%;
+}
+.about-button {
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+  font-weight: 610;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+.about-button:hover {
+  transform: translateY(-5px); /* Slight shift for smoother hover */
+  filter: brightness(1.1);
+  color: rgb(71, 71, 71);
+}
+/* Media Query for screens less than 1024px */ 
+@media screen and (max-width: 1024px) {
+  .about-what-to-expect {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 2rem;
+  }
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 0.75rem;
+  }
+  .about-left,
+  .about-right {
+    width: 100%;
+    max-width: 380px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Reversing order of items inside the right column to match left column layout */
+  .about-right {
+    flex-direction: column;  /* Ensure it stays column-wise */
+  }
+  /* Reverting order for the right column: image first, then h3, p, and button */
+  .about-right .about-image {
+    order: -1; /* Move the image to the top */
+    
+  }
+  .about-button {
+    margin-top: 0.5rem !important;
+    margin-bottom: 1.2rem !important;
+    align-self: flex-start;
+  }
+  .about-left h3,
+  .about-right h3 {
+    font-size: var(--mobile-h3-font-size);
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem !important;
+    text-align: center;
+  }
+  .about-left p,
+  .about-right p {
+    text-align: left;
+    text-indent: 0.5rem;
+    font-size: var(--mobile-p-font-size);
+    margin-bottom: 0rem;
+  }
+}
+
+
+/* Lead Pastor Section */
+.lead-pastor {
+  position: relative;
+  background-image: url("/BG1.jpg"); /* Replace with your image path */
+  background-size: cover;
+  background-position: 80% 0%;
+  background-repeat: no-repeat;
+  padding: 6.18rem 5rem;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+/* Apply text color specifically to h2 */
+.lead-pastor h2 {
+  margin-top: -2rem;
+  color: white;
+  margin-bottom: 0.25rem;
+  z-index: 2;
+}
+
+/* Pseudo-element for overlay */
+.lead-pastor::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: -1;
+}
+
+/* Content inside the lead-pastor section */
+.lead-pastor-content {
+  position: relative;
+  display: flex;
+  flex-direction: row; /* Image on the left, text on the right */
+  text-align: left;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  z-index: 3;
+}
+.pastor-img {
+  width: 355px; /* Fixed width for the square */
+  height: 355px; /* Fixed height to match the width */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  margin-top: 2rem;
+  margin-left: 25px;
+  margin-right: 48px;
+  display: block;
+  object-fit: cover; /* Ensures image covers the square container */
+  object-position: bottom 20%; /* Ensures the image is cropped from the top */
+}
+.pastor-text {
+  flex: 1;
+  margin-top: -4rem;
+  z-index: 2;
+}
+.pastor-text-subtitle {
+  margin-top: 0rem;
+  font-size: 0.8rem;
+}
+.pastor-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 5rem;
+}
+.pastor-bio {
+  color: #ffffffd8;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  margin-right: -1rem;
+  max-width: 400px;
+}
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  /* Adjust Lead Pastor Section */
+  .lead-pastor {
+    min-height: 100vh; /* Full height for mobile */
+    min-height: 42.5rem;
+    padding: 2rem 2rem; /* Reduced padding on smaller screens */
+  }
+
+  .lead-pastor-content {
+    flex-direction: column; /* Stack image and text vertically */
+    text-align: center; /* Center the text */
+    gap: 1.0rem;
+    width: 100%; /* Ensure the content fits within the screen */
+    margin: 0; /* Remove margins for better alignment */
+  }
+
+  /* Adjust Title */
+  .lead-pastor h2 {
+    font-size: 1.5rem; /* Reduce heading size on mobile */
+    margin-top: 0.65rem; /* Remove top margin */
+    margin-bottom: 0.1rem;
+  }
+
+  .pastor-text-subtitle {
+    margin-bottom: 1rem; /* Remove the negative margin */
+    text-align: center;
+  }
+
+  /* Adjust Pastor Image */
+  .pastor-img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 0;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Adjust Pastor Name */
+  .pastor-name {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem; /* Smaller font size for name */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; /* Reduce the margin */
+    text-align: center; /* Ensure name is centered */
+  }
+
+  /* Adjust Pastor Text */
+  .pastor-text {
+    margin-top: 0; /* Remove the negative margin */
+    width: 100%;
+    text-align: center; /* Center the text */
+    margin-left: auto;
+    margin-right: auto;
+    text-indent: 0.5rem;
+    font-size: 0.7vw;
+  }
+
+  /* Adjust Bio */
+  .pastor-bio {
+    font-size: var(--mobile-p-font-size); /* Smaller font size for the bio */
+    font-size: clamp(0.5rem, 3.4vw, 0.76rem);
+    margin-bottom: 1rem; /* Ensure there is space between name and bio */
+    text-align: center; /* Center the bio text */
+    width: 100%; /* Ensure the bio takes full width */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+/* Church Community Section */
+.church-community {
+  background-color: var(--light-bg);
+  color: #333;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.church-community h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+}
+.church-community p {
+  font-size: 0.86rem;
+  font-weight: normal;
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+  width: 100%;
+  max-width: 950px;
+}
+/* Action Buttons Container */
+.church-community .action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.2rem;
+}
+/* Button Styling */
+.church-community .action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+/* Donate Button */
+.church-community .donate-btn {
+  background-color: var(--accent);
+  color: black;
+}
+.church-community .donate-icon {
+  transform: translateY(0px); /* Keeps icon in place */
+}
+/* Apparel Button */
+.church-community .apparel-btn {
+  background-color: var(--secondary-accent);
+  color: black;
+}
+.church-community .apparel-icon {
+  transform: translateY(0px); /* Keeps icon in place */
+}
+/* Hover Effects */
+.church-community .action-btn:hover {
+  transform: translateY(-5px); /* Slight shift for smoother hover */
+  filter: brightness(1.1);
+  color: rgb(71, 71, 71);
+}
+/* Gallery Image Styling */
+.gallery-swiper .swiper-slide {
+  position: relative;
+
+}
+.gallery-swiper img {
+  width: 90%;
+  max-width: 950px; /* Constrain image width */
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: contain; /* Ensures images are cropped properly */
+  border-radius: 10px;
+  overflow: hidden; /* Prevent slides from overflowing container */
+  margin: 0 auto;
+}
+/* Decorative Icon */
+.church-community .mt-6 {
+  display: flex;
+  justify-content: center;
+}
+/* Mobile Responsiveness for Church Community */
+/* Mobile Responsiveness for Church Community */
+@media (max-width: 1024px) {
+  /* Adjust Church Community Section */
+  .church-community {
+    padding: 0rem; /* Reduced padding on smaller screens */
+    min-height: 55vh;
+    min-height: 40rem; /* Ensure it takes full height of the viewport */ /* Shrink the whole section to fit within 380px */
+    margin: 0 auto; /* Center the section */
+  }
+  .church-community h2 {
+    max-width: 320px; /* Limit width of the heading */
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  /* Adjust Paragraph Text */
+  .church-community p {
+    font-size: 0.75rem; /* Set font size to 0.85rem */
+    text-align: center; /* Center text on mobile */
+    max-width: 320px;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    color: #333; /* Set text color to match Lead Pastor text */
+  }
+  /* Action Buttons Container */
+  .church-community .action-buttons {
+    display: flex;
+    justify-content: center; /* Keep horizontal layout */
+    gap: 0rem;
+    margin-bottom: 1.5rem;
+  }
+  /* Button Styling */
+  .church-community .action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem; /* Button font size to match text */
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;/* Same text color as other sections */
+  }
+  /* Donate Button */
+  .church-community .donate-btn {
+    background-color: var(--accent);
+    color: black;
+  }
+  .church-community .donate-icon {
+    transform: translateY(0px); /* Keeps icon in place */
+  }
+  /* Apparel Button */
+  .church-community .apparel-btn {
+    background-color: var(--secondary-accent);
+    color: black;
+  }
+  .church-community .apparel-icon {
+    transform: translateY(0px); /* Keeps icon in place */
+  }
+  .church-community .action-btn:hover {
+    transform: translateY(-5px);
+    /* Slight shift for smoother hover */
+    filter: brightness(1.1);
+    color: rgb(71, 71, 71);
+  }
+    /* Gallery Image Styling */
+  .gallery-swiper {
+    position: relative;
+    width: 90%;
+    height: 16rem;
+    max-width: 360px;
+    margin-top: 0rem;
+    margin-bottom: 0.1rem;
+    overflow: hidden;
+  }
+    /* Gallery Image Styling */
+  .gallery-swiper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures images are cropped properly */
+    /* Ensures the image fully covers the space */
+    aspect-ratio: 4 / 3;
+    /* Keeps the aspect ratio as 4:3 */
+    border-radius: 10px;
+    display: block;
+    /* Remove default inline behavior */
+    margin: 0.5rem auto;
+    /* Center the image horizontally */
+    box-sizing: border-box;
+    /* Ensures padding doesn't affect overall size */
+  }
+}
+
+
+/* Visit Section */
+.visit {
+  background-color: #141414;
+  color: white;
+  text-align: center;
+  padding: 1.7rem 0;
+}
+
+.visit h2 {
+  margin: 0.8rem auto 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.visit p {
+  margin-bottom: 1rem;
+}
+
+.visit iframe {
+  width: 98.8vw;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 2rem);
+  height: 35vw;
+}
+
+.visit .max-w-5xl {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Visit Content Container */
+.visit-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  margin: 4rem auto 0.5rem;
+}
+
+/* Service Times and Upcoming Sections */
+.service-and-upcoming-structure {
+  text-align: left;
+  width: 100%;
+}
+
+.contactus-structure {
+  width: 100%;
+  margin-top: -0.9rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.service {
+  font-weight: 650;
+}
+
+.time {
+  text-align: right;
+}
+
+/* Upcoming Events */
+.servicetimes,
+.upcoming {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 4rem auto; /* <-- This centers them visually */
+  text-align: center;
+  font-size: 1.3rem;
+}
+.servicetimes p,
+.upcoming p {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 0.8rem auto; /* Center the individual line too */
+}
+.upcoming p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 5rem;
+}
+
+.upcoming .date {
+  font-weight: 700;
+  margin-right: 10px;
+  white-space: nowrap; /* Prevents date from wrapping */
+}
+
+.upcoming .event {
+  text-decoration: underline;
+  position: relative;
+  white-space: nowrap; /* Prevents event text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+}
+
+.event:hover {
+  color: var(--hp-button-hover);
+  transition: color 0.3s ease;
+}
+
+/* Collapsible Heading */
+.collapsible-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  max-width: 490px;
+  margin: 0 auto;
+  padding: 0.5rem 3rem;
+}
+
+.collapsible-heading span {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.collapsible-heading:hover {
+  color: var(--hp-button-hover);
+  transition: color 0.3s ease;
+}
+
+.collapsible-heading svg {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+.collapsible-heading svg.rotate {
+  transform: rotate(-180deg);
+}
+
+/* Contact Us Form */
+.contactus {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-input {
+  display: block;
+  width: 100%;
+  max-width: 1400px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.contactus .message {
+  height: 10rem;
+  resize: vertical;
+}
+
+.contact-input::placeholder {
+  color: rgb(231, 231, 231);
+  font-weight: 400;
+}
+
+.contact-btn {
+  margin-top: 0.8rem;
+  margin-bottom: 3.5rem;
+  background-color: rgb(94, 94, 94);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: inline-block;
+  width: auto;
+}
+@media (max-width: 1024px) {
+  .visit {
+    height: 100%;
+    padding: 1.3rem 1rem;
+    text-align: center;
+  }
+
+  .visit h2 {
+    font-size: 1.5rem;
+    margin-top: var(--mobile-h3-margin-top);
+    margin: 0;
+  }
+
+  .visit .title {
+    margin-bottom: 0.5rem;
+  }
+
+  .visit p,
+  .service-and-upcoming-structure,
+  .contactus-structure,
+  .visit .servicetimes,
+  .visit .upcoming,
+  .visit .contactus {
+    font-size: var(--mobile-p-font-size);
+  }
+
+  .visit iframe {
+    width: 100vw;
+    min-height: 40vh;
+    max-height: 20rem;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .visit-content {
+    max-width: 76vw;
+    margin: 1.5rem auto; /* Centering the content */
+  }
+
+  .visit .collapsible-heading {
+    font-size: var(--mobile-h3-font-size);
+    padding: 0.25rem 0.75rem;
+    width: 80%;
+    gap: 0rem;
+    margin: 0 auto; /* Centering the collapsible heading */
+  }
+
+  .visit .collapsible-heading svg {
+    margin-bottom: 0rem;
+    margin-left: 0.5rem;
+    width: 1.2rem; /* Adjusted size */
+    height: 1.2rem; /* Adjusted size */
+  }
+
+  /* Center and limit width of left/right containers */
+  .service-and-upcoming-structure,
+  .contactus-structure {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 280px;
+  }
+
+  .visit .servicetimes,
+  .visit .upcoming {
+    width: clamp(1rem,60vw,14rem);
+    justify-content: center; /* Centering content */
+    text-align: center;
+    margin: 0 auto; /* Centering the service times and upcoming sections */
+    margin-bottom: 1.5rem; /*p bottom spacing*/
+    padding: 0;
+  }
+  
+  .service {
+    text-decoration: none;
+  }
+
+  .date {
+    text-decoration: none;
+  }
+
+  .visit .servicetimes p,
+  .visit .upcoming p {
+    display: flex;
+    gap: 0rem;
+    margin-bottom: 0.05rem; /* Space between service name and time */
+    text-align: center; /* Align items vertically centered */
+  }
+
+  .visit .contactus {
+    margin: 1rem auto; /* Centering the contact us section */
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+  }
+
+  .contactus .message {
+    height: 7rem; 
+  }
+
+  .contact-input {
+    font-size: var(--mobile-p-font-size);
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-btn,
+  .upcoming-btn {
+    font-size: var(--mobile-p-font-size);
+    padding: 0.5rem 1.5rem;
+    background-color: rgb(94, 94, 94);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto;
+    margin: 0 auto; /* Centering buttons */
+  }
+
+  .contact-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+
+/* Specific Page Styles for Our Beliefs */
+.beliefs-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Full viewport height initially */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-x: hidden;
+  margin: 0; /* Ensure no margin on the parent container */
+  padding: 0; /* Remove any padding from parent */
+  flex-direction: column; /* Make sure content flows vertically */
+}
+/* Background Image on Beliefs Page */
+.beliefs-page img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Keeps the background behind the content */
+  pointer-events: none; /* Ensures the background does not interfere with interactions */
+}
+/* Main Section of Beliefs Page */
+.beliefs-section {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  padding: 12vh 9vh; /* Keep your original padding */
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin: 0; /* Ensure no margin on section */
+  transition: padding 0.4s ease, border-radius 0.4s ease;
+}
+/* Expanded State of Beliefs Section */
+.beliefs-section.expanded {
+  width: 100vw; /* Force full width */
+  height: auto; /* Allow content to expand naturally */
+  border-radius: 0; /* Ensure no rounded corners when expanded */
+  padding-top: 10rem; /*top*/
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Push content down */
+  position: relative; /* Flow naturally in the page layout */
+  top: 0;
+  left: 0;
+}
+/* Headings for Beliefs Section */
+.beliefs-section h1 {
+  white-space: nowrap;
+  font-size: 4.5rem;
+  font-weight: 750;
+  margin-top: -3rem; /* Adjust top margin */
+  margin-bottom: 4rem;
+}
+.beliefs-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: -3rem;
+  margin-bottom: 0.5rem;
+}
+.beliefs-section p {
+  font-size: 1.2rem;
+  font-weight: 350;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+/* Learn More Button */
+.learn-more-button {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: -2rem;
+  background-color: var(--hp-button-color); /* Customize with your color variable */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease;
+}
+.learn-more-button:hover {
+  transform: scale(1.05);
+  background-color: rgb(104, 104, 104);
+}
+/* Expanded Details for Beliefs */
+.beliefs-details {
+  max-width: 825px;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  margin-bottom: 0rem; /* Adjust bottom margin */
+}
+/* When beliefs details expand */
+.beliefs-page.expanded .beliefs-details {
+  opacity: 1;
+}
+/* Belief Item */
+.belief-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  max-width: 1000px;
+  padding: 3rem 1rem; /* Padding inside each belief item */
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem auto; /* Gap between items */
+}
+.belief-item h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.belief-item p {
+  font-size: 1rem;
+  font-weight: 350;
+  line-height: 1.6;
+  text-align: left;
+  width: 83%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  .beliefs-page {
+    min-height: 100dvh; /* Fix for mobile browsers */
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  .beliefs-section {
+    display: flex;
+    flex-direction: column;  /* Align content vertically */
+    justify-content: center;
+    padding: clamp(0.5rem, 5vh, 32.8rem) clamp(0.20rem, 0.25rem, 1.5rem); /* Clamped padding for vertical */
+    width: clamp(1rem, 79vw, 32.0rem);/* */
+  }
+  .beliefs-section h1 {
+    font-size: clamp(0.75rem, 7.5vw, 3.1rem);
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+  }
+  .beliefs-section h2 {
+    font-size: clamp(0.75rem, 3.5vw, 1.3rem);
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+  }
+  .beliefs-section p {
+    font-size: clamp(0.65rem, 2.75vw, 1.1rem);
+    width: 80%;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+  .learn-more-button {
+    font-size: clamp(0.6rem, 3.5vw, 1.1rem);
+    padding: clamp(0.25rem, 1.25vh, 0.8rem) 
+            clamp(0.5rem, 3vw, 1.5rem); /* button padding */
+    margin-bottom: 0.25rem;
+  }
+  .beliefs-section.expanded {
+    padding: clamp(0.25rem, 4.5vh, 4.0rem)
+            clamp(0.8rem, 5vw, 1.5rem); /*top+bot whole pg*/
+    border-radius: 0;
+    min-height: 100dvh;
+    height: auto;
+    box-sizing: border-box;
+    overflow: visible; /* Allow content to flow naturally */
+    justify-content: flex-start;
+  }
+  .beliefs-details {
+    padding: clamp(0.25rem, 1.3vh, 4.0rem) 
+              clamp(0.8rem, 3vw, 1.5rem); 
+    padding-bottom: 0rem;
+    border-radius: 0;
+  }
+  .belief-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: clamp(10rem, 83vw, 50rem);
+    height: clamp(2rem, 80vw, 17rem); /* increased height */
+    margin: 1rem auto;
+    padding: clamp(1rem, 2vh, 3rem) clamp(1rem, 2vw, 3rem); /* more vertical padding */
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .beliefs-section.expanded h1 {
+    margin-top: 4rem;
+  }
+  .beliefs-section.expanded h1 {
+    margin-top: 4rem;
+  }
+  .belief-item h3 {
+    width:100%;
+    font-size: clamp(0.9rem, 3.5vw, 1.6rem);
+    margin-bottom: 0.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  .belief-item p {
+    width:99%;
+    font-size: clamp(0.5rem, 3.7vw, 1rem); /* slightly larger for readability */
+    margin-bottom: 0.5rem;
+    text-align: center;
+    line-height: clamp(1.3, 1vw, 1.6); /* Clamped line-height *//* improve vertical spacing */
+  }
+}
+
+
+
+/* Full-page Background */
+.donate-page {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height initially */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+/* When donate-section is expanded, allow dynamic height */
+.donate-page.expanded {
+  height: auto; /* Let the content expand naturally */
+}
+/* Background Image */
+.donate-page img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Main Section */
+.donate-section {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  padding: 10vh 6vh; /* Adjust padding for smaller screens */
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: padding 0.4s ease; /* Smooth transition for padding */
+}
+/* Headings */
+.donate-section h1 {
+  white-space: nowrap;
+  font-size: 4.5rem;
+  font-weight: 750;
+  margin-top: -3rem; /* Adjust top margin */
+  margin-bottom: 4rem;
+}
+.donate-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: -3rem;
+  margin-bottom: 0.5rem;
+}
+.donate-section p {
+  font-size: 1.10rem;
+  font-weight: 350;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+/* Expanded State */
+.donate-section.expanded {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  padding: 11rem 2rem; /* Increase padding for expanded state */
+  overflow-y: auto; /* Allow scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Push content down */
+}
+/* Main Donate Button */
+.donate-button {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--hp-button-color);
+  color: white;
+  font-size: 1.0rem;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.donate-button:hover {
+  transform: scale(1.05);
+  background-color: rgb(104, 104, 104);
+}
+
+/* Donation Options Container */
+.donation-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+/* Staggered Animation with Delays for Each Button */
+.option-button {
+  width: 22rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex; /* change from flex to inline-flex to respect scale */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  transform-origin: center; /* ensures scaling is centered */
+}
+.email-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.copy-section {
+  position: relative;
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.tooltip {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(50%);
+  background-color: #28a745;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.zelle-info {
+  display: flex;
+  align-items: center;
+  background-color: #e9ecef;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.zelle-info .info-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #17a2b8;
+}
+.option-button:hover {
+  filter: brightness(0.85);
+}
+.button-text {
+  pointer-events: none;
+}
+.icon {
+  position: absolute;
+  right: 1.2rem; /* better than hardcoding based on width */
+  font-size: 1.7rem;
+}
+/* Button colors */
+.donation-options .venmo {
+  background-color: #008dff;
+}
+.donation-options .zelle {
+  background-color: #6c1cd5;
+}
+.donation-options .applepay {
+  background-color: #000000;
+}
+@media (max-width: 1024px) {
+  /* Full-page Background for Mobile */
+  .donate-page {
+    height: 100vh; /* Ensure it fills the viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  /* When donate-section is expanded, allow dynamic height */
+  .donate-page.expanded {
+    height: auto; /* Let the content expand naturally */
+  }
+  /* Background Image */
+  .donate-page img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  /* Main Section Adjustments */
+.donate-section {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  padding: clamp(0.5rem, 5vh, 32.8rem) clamp(0.20rem, 0.25rem, 1.5rem); /* Clamped padding for vertical */
+    width: clamp(1rem, 79vw, 32.0rem);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: padding 0.4s ease;
+}
+
+/* Headings Adjustments */
+.donate-section h1 {
+  white-space: nowrap;
+  font-size: clamp(0.75rem, 7.5vw, 3.1rem); /* Font size with clamped units */
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}
+
+.donate-section h2 {
+  font-size: clamp(0.75rem, 3.5vw, 1.3rem); /* Font size with clamped units */
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.donate-section p {
+  font-size: clamp(0.65rem, 2.75vw, 1.1rem); /* Font size with clamped units */
+  font-weight: 350;
+  max-width: 80%;
+  margin-bottom: 2rem;
+}
+
+/* Expanded State for Mobile */
+.donate-section.expanded {
+  padding: 9rem 2rem; /* Consistent padding in rem */
+  overflow-y: auto; /* Allow scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Push content down */
+}
+
+/* Main Donate Button Adjustments */
+.donate-button {
+  font-size: clamp(0.6rem, 3.5vw, 1.1rem);
+  padding: clamp(0.25rem, 1.25vh, 0.8rem) 
+       clamp(0.5rem, 3vw, 1.5rem); /* Consistent padding in rem */
+  background-color: var(--hp-button-color);
+  color: white; /* Font size with clamped units */
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+  .donate-button:hover {
+    filter: brightness(0.85);
+  }
+  /* Donation Options Container Adjustments */
+  .donation-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Staggered Animation with Delays for Each Button */
+  .option-button {
+    margin-bottom: 2rem;
+    color: white;
+    border: none;
+    white-space: nowrap;
+    padding: clamp(0.25rem, 1.75vh, 0.8rem) 
+           clamp(0.5rem, 26vw, 9.5rem); 
+    font-size: clamp(0.6rem, 3.5vw, 1.1rem);
+    width: clamp(0.5rem, 26vw, 7.5rem);/* Ensure the button occupies 100% width of its parent */
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex; /* Use flex for proper alignment and stretching */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    transform-origin: center; /* Ensures scaling is centered */
+    box-sizing: border-box; /* Includes padding and border in width calculation */
+  }
+  .option-button:hover {
+    filter: brightness(0.85);
+  }
+  .button-text {
+    pointer-events: none;
+  }
+  .icon {
+    position: absolute;
+    right: 1.2rem; /* better than hardcoding based on width */
+    font-size: clamp(1.5rem, 5vw, 1.7rem);
+  }
+}
+
+
+
+/* Apply common styles to apparel page */
+.apparel-page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--dark-gray);
+  font-family: var(--heading-font);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+/* Intro screen styles */
+.intro-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+  transition: all 0.7s ease-in-out;
+}
+.intro-screen.shrink {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  left: 0;
+  transform: none;
+  overflow: hidden;
+  transition:  1s ease-out 0.75s; /* Add 1 second delay before transition starts */
+}
+.apparel-page.show-scrollbar {
+  overflow: auto; /* Enable scrollbar after animation */
+}
+/* Intro image */
+.intro-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* Intro text */
+.intro-header {
+  position: absolute;
+  top: 69%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(2rem, 7vw, 6.5rem);
+  font-weight: 800;
+  color: var(--dark-gray);
+  text-align: center;
+  border-radius: 120px;
+  width: 80%;
+  padding: 0.5rem 1rem;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out 0s;
+  z-index: 2;
+}
+.intro-screen.appear .intro-header {
+  opacity: 1;
+}
+/* Fade out transition */
+.intro-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1s ease-in-out,
+    visibility 0s 1s;
+}
+/* Navbar visibility control */
+.hide-navbar {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.5s ease-in-out,
+    visibility 0s 0.5s;
+}
+.show .hide-navbar {
+  opacity: 1;
+  visibility: visible;
+}
+/* Main content section */
+.main-content {
+  width: 100%;
+  padding: 4rem 1rem;
+  min-height: 100vh;
+  background-color: #212124;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+  transition: opacity 1s ease-in-out, visibility 0s 1s;
+}
+.main-content.show {
+  opacity: 1;
+  visibility: visible;
+  z-index: 3;
+}
+/* Headings and paragraph styles */
+.main-content h1,
+.main-content h2 {
+  max-width: 910px;
+  font-family: var(--heading-font);
+  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  font-weight: 700;
+  margin-top: 2rem;
+  text-align: center;
+}
+.main-content p {
+  font-size: clamp(0.95rem, 2.5vw, 1.8rem);
+  font-weight: 380;
+  max-width: 1000px;
+  text-align: center;
+  margin-top: 1rem;
+}
+/* T-shirt button container */
+.t-shirt-text {
+  margin-bottom: 1.75rem;
+}
+/* Button container */
+/* Button container */
+.main-content .t-shirt {
+  background-color: rgb(61, 61, 61);
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24rem;
+  width: 22rem;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.main-content .t-shirt:hover {
+  background-color: rgb(160, 160, 160);
+  transform: scale(1.025);
+}
+
+/* Pulsing wave effect */
+.main-content .t-shirt:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-wave 2.5s ease-out infinite; /* Slower pulse */
+  opacity: 0;
+}
+
+.main-content .t-shirt:hover:before {
+  opacity: 1; /* Make the wave visible on hover */
+}
+
+/* Animation for the wave */
+@keyframes pulse-wave {
+  0% {
+    transform: translate(-50%, -50%) scale(0);  /* Starts at the center, invisible */
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.8);  /* Expands to 1.8x, goes outside the button */
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);  /* Expands further to 3x, goes outside even more */
+    opacity: 0;
+  }
+}
+
+.main-content .t-shirt:active {
+  transform: scale(1);
+}
+.main-content .t-shirt:hover img {
+  transform: scale(1.02);
+}
+/* T-shirt image styling */
+.main-content .t-shirt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Gallery Swiper styles */
+.apparel-page .gallery-swiper {
+  width: 100%;
+  max-width: 950px;
+  margin: 5.5rem auto 0;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.image-gallery-swiper {
+  width: 100%;
+  max-width: 950px;/*gallery width*/
+  margin: 2.5rem auto 0;
+  margin-bottom: 1.5rem;/*push tshirt*/
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.image-gallery-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.image-swiper-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.image-swiper-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .intro-image {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+  }
+  .intro-screen.shrink {
+    position: relative;
+    transition:  1.0s ease-out 1s; /* Add 1 second delay before transition starts */
+  }
+  .intro-header {
+    font-size: clamp(1.5rem, 11vw, 3.0rem);
+    margin-top: -2rem;
+    transform: translate(-50%, -50%);
+  }
+  .main-content {
+    padding: 2.5rem 1rem;
+    min-height: auto;
+    text-align: center;
+  }
+  .main-content h1,
+  .main-content h2 {
+    font-size: clamp(1rem,4vw, 2rem);
+    max-width: 90%;
+    margin-top: 0rem;
+  }
+  .main-content p {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+    width: clamp(50vw, 90%, 100vw);
+    margin-top: 0.5rem;
+  }
+  .t-shirt-text {
+    margin-bottom: -0.25rem;
+  }
+  .main-content .t-shirt {
+    height: clamp(50vw, 60%, 90vw); /* Smaller height */
+    width: clamp(30vw, 60%, 45vw);/* Adjust max-width for smaller devices */
+    font-size: 1rem; /* Smaller font size for mobile */
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+  }
+  .main-content .t-shirt img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .apparel-page .gallery-swiper {
+    max-width: 90%;
+    margin-top: 2rem;
+  }
+  .image-gallery-swiper {
+    width: clamp(75vw, 60%, 90vw);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+
+.product-page {
+  background-color: #f0f0e5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Changed to flex-start to align to the top */
+  font-family: var(--heading-font);
+  color: rgb(31, 31, 31);
+  overflow: visible;
+  padding: 2rem 0;
+}
+.product-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px; /* Reduced max-width for a more focused layout */
+  gap: 2rem;
+  padding: 5rem 1rem;
+  margin: 0 auto;
+}
+.product-options {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the radio buttons horizontally */
+}
+.product-options label {
+  display: block;
+  font-weight: 450;
+  margin-bottom: 2.5rem;
+  font-size: 1.3rem;
+}
+.productpage.caret-icon {
+  transition: transform 0.3s ease;
+}
+
+.productpage.caret-icon:hover {
+  transform: rotate(180deg);
+}
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  background-color: rgb(212, 210, 205);
+  border: 2px solid #222222; /* Keep this border */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.692);
+  padding: 1.4rem 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;  
+  border-radius: 1.5rem;
+  /*transition:
+    background 0.3s ease,
+    opacity 0.3s ease;*/
+}
+.arrow-button:hover {
+  background: rgba(255, 255, 255, 0.705);
+}
+.left-arrow {
+  left: 7rem;
+  transition: background-color 0.3s ease;
+}
+.right-arrow {
+  right: 7rem;
+  transition: background-color 0.3s ease;
+}
+.group {
+  text-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  display: flex;
+  cursor: pointer;
+  background-color: var(--gray-button-color);
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.6rem;
+  color: black;
+  border: 2px solid #222222;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.692);
+  transition: background-color 0.3s ease;
+  width: 55%;
+}
+.group:hover {
+  background-color: rgba(255, 255, 255, 0.342);
+}
+.group:focus-within {
+  outline: 5px solid #2563eb; /* Tailwind's blue-500 */
+}
+.group.checked {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.text-blue-600 {
+  color: #2563eb; /* Tailwind's blue-600 */
+}
+.text-black {
+  color: black;
+}
+.w-6 {
+  width: 1.8rem;
+}
+.h-6 {
+  height: 1.8rem;
+}
+.quantity-selector {
+  color: #0c0c0c;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  width: 100%; /* Ensure full width */
+}
+.quantity-selector label {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+.quantity-selector button {
+  border: none;
+  padding: 0.5rem 1rem; /* Reduced vertical padding */
+  margin: 0rem 1rem;
+  font-weight: 650;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+.quantity-selector button:hover {
+  color: rgba(0, 0, 0, 0.377);
+  transition: all 0.3s ease; /* Ensure transition works on hover too */
+}
+.quantity-selector span {
+  font-size: 1.5rem;
+}
+.quantity-selector .span2 {
+  font-size: 2.5rem;
+}
+.caret-icon {
+  transition: transform 0.3s ease;
+}
+
+.product-page .caret-icon {
+  transition: transform 0.3s ease;
+}
+.product-page .caret-icon.rotate {
+  transform: rotate(-180deg);
+}
+.product-page h3,
+.product-page .collapsible-button {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.product-page p {
+  font-size: 1.2rem;
+  max-width: 600px; /* Set a max width to wrap text sooner */
+  font-weight: 400;
+  color: #272727;
+}
+.product-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+.product-title {
+  font-size: 5.5rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem; /* Increased bottom margin */
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+.product-gallery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.image-previews {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.0rem;
+}
+.preview-wrapper {
+  width: 80px;
+  height: 80px;
+  padding: 4px;
+  border: 2px solid transparent;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.preview-wrapper.selected {
+  border-color: black;
+}
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.add-to-bag-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.add-to-bag-button {
+  background-color: rgb(212, 210, 205);
+  border: 2px solid #222222;
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* Ensure the entire button is clickable */
+}
+.add-to-bag-container {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.add-to-bag-button {
+  width: 100%;
+  max-width: 280px;
+  background-color: rgb(212, 210, 205);
+  border: 2px solid #222222;
+  transition: background-color 0.3s ease;
+}
+.add-to-bag-button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none; /* Remove any default focus box shadow */
+}
+.add-to-bag-button .text-sm {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: black;
+}
+.add-to-bag-button:hover {
+  background-color: rgba(255, 255, 255, 0.342);
+}
+.add-to-bag-button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none; /* Remove any default focus box shadow */
+}
+.collapsible-section {
+  width: 100%;
+  max-width: 805px; /* Match the width of your radio buttons */
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the entire section */
+}
+.collapsible-section h3 {
+  width: 100%; /* Ensure full width */
+  text-align: left; /* Align text to the left */
+}
+.collapsible-section.description h3 {
+  cursor: default; /* Prevents the cursor from changing on hover */
+  user-select: none; /* Prevents text selection */
+}
+/*
+.speacialfont {
+  font-size: 3rem; 
+  line-height: 1.6;
+  color: #333;
+  font-weight: 900;  
+  letter-spacing: 0.5px; 
+  font-family: var(--cursive-font);
+}*/
+.collapsible-section.description h3:hover {
+  cursor: default; /* Ensures no hover effect */
+}
+.collapsible-section p {
+  width: 100rem; /* Ensure full width */
+  text-align: left; /* Align text to the left */
+  max-width: 100%; /* Remove any previous max-width constraints */
+}
+.collapsible-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.collapsible-content {
+  width: 100%; /* Ensure full width */
+  text-align: left; /* Align text to the left */
+}
+.read-more-button {
+  width: 100%; /* Ensure full width */
+  text-align: left; /* Align text to the left */
+  background: none;
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.3rem;
+  text-decoration: underline;
+  padding: 0;
+}
+.read-more-button:hover {
+  text-decoration: underline;
+}
+@media (max-width: 1024px) {
+  .product-container {
+    transform: scale(1);
+    padding: 2rem 1rem;
+    max-width: 95vw;
+  }
+  .main-image-container {
+    margin-top: 2.5rem;/*push from top*/
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 300px;
+  }
+  .arrow-button {
+    padding: 0.8rem 0.2rem;
+    font-size: 0.5rem;
+    border-radius: 2rem;
+  }
+
+  .left-arrow {
+    left: -1.25rem;
+  }
+
+  .right-arrow {
+    right: -1.25rem;
+  }
+
+  .preview-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .product-title {
+    font-size: 2.5rem;
+  }
+  .product-page p {
+    font-size: 0.95rem;
+  }
+  .product-page h3,
+.product-page .collapsible-button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.collapsible-section.description h3 {
+  margin-top: 0;
+}
+  .quantity-selector .span2 {
+    font-size: 1.5rem;
+  }
+  .group {
+    width: 85%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+  .add-to-bag-container {
+    width: 70%;
+  }
+  .add-to-bag-button .text-sm {
+    font-size: 0.95rem;
+  }
+  /* Collapsible section adjustments */
+  .collapsible-section {
+    max-width: 89vw; /* Make section narrower */
+    padding: 0 0.5rem;
+  }
+  .collapsible-section p {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+.bag-page {
+  background-color: rgb(240, 240, 229);
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem 0;
+
+}
+.bag-container {
+  width: 100vw;
+  max-width: 1000px; /* Adjusted to be more narrow */
+  padding: 0 2rem; /* Added more padding for better spacing */
+}
+.bag-title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-top: 7rem;
+  margin-bottom: 6rem;
+  font-weight: bold;
+  color: black;
+}
+.bag-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: flex-start; /* Aligns items to the top */
+    width: 100%;
+  max-width: 1300px; /* Keeps it from stretching too much */
+  margin: 0 auto; /* Centers horizontally */
+}
+.bag-items {
+  flex: 2;
+}
+.bag-item {
+  background-color: transparent; /* Remove box background */
+  padding: 0; /* Remove padding */
+  margin-bottom: 2rem;
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+}
+.item-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;  
+  margin-right: 2rem;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center; /* Ensures image is aligned with text */
+}
+.item-details {
+  flex-grow: 1;
+  margin-bottom: 4.75rem;
+}
+.item-details h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: black;
+  font-weight: bold;
+}
+.item-details p {
+  margin-bottom: 1rem;
+  color: black;
+  font-size: 1.2rem;
+}
+.item-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: black;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.quantity-control button {
+  background-color: rgb(212, 210, 205);
+  border: 2px solid black;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+.quantity-control button:hover {
+  background-color: rgb(236, 235, 230);
+  border-color: #555;
+}
+.remove-item {
+  background: none;
+  border: none;
+  color: rgb(31, 31, 31);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+.remove-item:hover {
+  color: rgb(167, 167, 167);
+}
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+}
+.empty-state p {
+  color: black;
+  font-size: 1.5rem;
+}
+.bag-order-summary {
+  flex: 1;
+  margin-left: auto; /* Pushes it to the right */
+  height: auto; /* Adjust height dynamically */
+  max-width: 400px; /* Keeps it from stretching too much */
+  display: flex;
+  flex-direction: column;
+  background: none; /* Removes background */
+  padding: 0; /* Removes padding */
+  border: none; /* Removes border */
+  box-shadow: none; /* Removes shadow */
+}
+.bag-order-summary h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-weight: bold;
+}
+.bag-order-summary {
+  margin-bottom: 1.5rem;
+}
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 1.2rem;
+}
+.continue-to-checkout-button {
+  display: inline-block; /* Ensures that it behaves like a block element */
+  width: 100%;
+  padding: 1rem;
+  background-color: black;
+  color: white; /* Ensures the text is white */
+  text-align: center; /* Centers the text inside */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none; /* Remove default underline */
+}
+
+.continue-to-checkout-button:hover {
+  background-color: rgb(73, 73, 73);
+}
+
+
+/* Page Layout */
+.checkout-page {
+  background-color: rgb(240, 240, 229);
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 5rem 0;
+}
+.checkout-container {
+  width: 100%;
+  max-width: 1500px;
+  padding: 0 2rem;
+  transform: scale(1.1);
+  position: relative;
+}
+.checkout-title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-top: 6rem;
+  margin-bottom: -2rem;
+  font-weight: bold;
+  color: black;
+}
+.checkout-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+/* User Info */
+.user-info {
+  margin-bottom: 2rem;
+  transform: scale(0.9);
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+}
+.user-info h3 {
+  font-size: 2.15rem;
+  margin-bottom: 1rem;
+  color: black;
+  font-weight: bold;
+}
+.user-info label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: black;
+}
+.user-info input,
+.user-info select {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid black;
+  background-color: white;
+  font-size: 1.2rem;
+  color: black;
+}
+.name-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.name-inputs input {
+  width: 48%;
+}
+.address-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.address-inputs input {
+  width: 48%;
+}
+/* Shipping Methods */
+.shipping-methods-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.shipping-method-group {
+  text-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.6rem;
+  color: black;
+  border: 2px solid #222222;
+  transition:
+    background-color 0.3s ease,
+    outline 0.3s ease;
+  width: 100%;
+  border-radius: 0.5rem;
+  outline: none;
+}
+.shipping-method-group:focus-within {
+  outline: 5px solid #2563eb;
+}
+.shipping-method-group:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+/* Pickup Details Link */
+.pickup-details-link {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+.pickup-details-link:hover {
+  color: #666;
+}
+/* Dark Overlay */
+.dark-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.pickup-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 2500px;
+  width: 100vw;
+  height: 120vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+/* Modal */
+.pickup-details-modal {
+  position: relative;
+  max-width: 50%;
+  max-height: 100%;
+  width: 100%;
+  height: auto;
+}
+.pickup-details-container {
+  position: relative; /* Ensures child elements are positioned relative to this */
+  display: flex;
+  justify-content: center; /* Centers the image */
+  align-items: center;
+  max-width: 1100px; /* Matches the image max-width */
+  margin: 0 auto; /* Centers the whole container */
+}
+.pickup-details-image {
+  width: 100%;
+  height: auto;
+  max-width: 1100px;
+  border-radius: 1rem;
+  display: block;
+}
+.pickup-details-close {
+  position: absolute;
+  top: -1.5rem; /* Adjust as needed */
+  right: 0.75rem; /* Adjust as needed */
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 4.5rem; /* Adjust size as needed */
+  cursor: pointer;
+  z-index: 1001;
+}
+/* Checkout and Payment */
+.checkout-page input {
+  border-radius: 0.5rem;
+}
+.payment-method {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.payment-method input {
+  width: 100%;
+}
+.checkboxes.billing-checkbox {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+.checkboxes.billing-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+.checkboxes.billing-checkbox input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+  height: 1rem;
+  width: 1rem;
+}
+.billing-address-section {
+  margin-bottom: 1rem;
+}
+.submit-button {
+  width: 100%;
+}
+.checkout-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.checkout-button:hover {
+  background-color: rgb(32, 32, 32);
+}
+/* Order Summary (Right Column) */
+.order-summary {
+  flex: 1;
+  position: sticky;
+  margin-top: 2rem;
+  max-width: 400px;
+  max-height: 75vh;
+  background-color: white;
+  padding: 7rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+.order-summary h3 {
+  font-size: 2rem;
+  margin-top: 2rem;
+  color: black;
+  font-weight: bold;
+}
+.summary-details {
+  margin-bottom: 1.5rem;
+}
+.item {
+  display: flex;
+  gap: 1rem;
+}
+.item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.item-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #000000;
+}
+.cost-summary {
+  margin-top: 1rem;
+}
+.subtotal,
+.shipping,
+.total {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 1.2rem;
+}
+/* Bag Page Styling */
+.bag-page {
+  background-color: rgb(240, 240, 229);
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem 0;
+}
+.bag-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 1rem;
+  transform: scale(1.2);
+}
+.bag-title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-top: 7rem;
+  margin-bottom: 6rem;
+  font-weight: bold;
+  color: black;
+}
+.bag-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 11rem;
+  align-items: flex-start;
+}
+.bag-items {
+  flex: 2;
+}
+.bag-item {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 2rem;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+}
+.item img {
+  width: 40%; /* Ensures the image takes up the full width of its container */
+  height: auto; /* Keeps the aspect ratio intact */
+}
+.item-details {
+  flex-grow: 1;
+  margin-bottom: 4.75rem;
+}
+.item-details h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: black;
+  font-weight: bold;
+}
+.item-details p {
+  margin-bottom: 1rem;
+  color: black;
+  font-size: 1.2rem;
+}
+.item-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: black;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.quantity-control button {
+  background-color: rgb(212, 210, 205);
+  border: 2px solid black;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+.quantity-control button:hover {
+  background-color: rgb(236, 235, 230);
+  border-color: #555;
+}
+.remove-item {
+  background: none;
+  border: none;
+  color: rgb(31, 31, 31);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+.remove-item:hover {
+  color: rgb(167, 167, 167);
+}
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+}
+.empty-state p {
+  color: black;
+  font-size: 1.5rem;
+}
+.order-summary {
+  flex: 1;
+  margin-left: auto;
+  height: auto;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  background: none;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+.order-summary h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-weight: bold;
+}
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 1.2rem;
+}
+.checkout-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.checkout-button:hover {
+  background-color: rgb(32, 32, 32);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--off-black);
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.footer-menu {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+}
+.footer-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.footer-link:hover {
+  color: #5f5c53;
+}
+.fminus-icon {
+  display: block; /* Switch to block to allow for width and height */
+  background-color: var(--hp-button-hover); /* Line color */
+  width: 100%; /* Stretch the line to match the footer's width */
+  max-width: 750px; /* Limit the width of the line */
+  height: 1.0px; /* Line thickness */
+  position: absolute; /* Keep it positioned relative to the footer */
+  left: 50%; /* Center horizontally */
+  top: 11rem; /* Adjust position from the top */
+  transform: translateX(-50%) translateY(-50%); /* Center it horizontally and vertically */
+  pointer-events: none; /* Prevent interaction with the icon */
+  z-index: 1; /* Ensure it's behind content */
+  transition: width 1.0s ease-out; /* Smooth transition for width */
+}
+.footer .copyright {
+  color: var(--hp-button-color);
+  margin-top: 8.6rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-size: 1.05rem;
+  padding-bottom: 5rem;
+}
+.social-icon {
+  display: flex;
+  align-items: center;
+  color: white;
+  transition: color 0.3s ease;
+}
+.social-icon:hover {
+  color: gray;
+}
+/* Media Query for screens less than 1024px (Tablets and Mobile) */
+/* Media Query for screens less than 1024px (Tablets and Mobile) */
+@media (max-width: 1024px) {
+  /* Apply mobile font size variables */
+  .footer {
+    padding: 1rem 0;
+    height: 33vh;
+    width: 100%;
+  }
+  .footer-menu {
+    display: flex;
+    flex-wrap: wrap;  
+    max-width: 295px;         /* Allow the items to wrap to the next line */
+    gap: 1rem;                 /* Add spacing between items */
+    margin-top: 2rem;
+    justify-content: center;   /* Center the items */
+  }
+  .footer-link {
+    font-size: 0.7rem; /* Use mobile font size */
+     /* Limit the width of each link */
+  }
+  .fminus-icon {
+    top: 9.0rem;
+    height: 0.25px;
+    width: 14.5rem;
+    font-size: 0.15rem;
+  }
+  .footer .copyright {
+    margin-top: 2.3rem;
+    font-size: 0.65rem;
+  }
+  .social-icon {
+    font-size: 0.5rem;
+    margin-bottom: 1rem;
+  }
 }
