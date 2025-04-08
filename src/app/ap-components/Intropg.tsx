@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "../components/Navbar";
-import { motion } from "framer-motion";
 
 interface IntroScreenProps {
   className?: string;

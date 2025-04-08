@@ -1,13 +1,12 @@
 "use client";
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import React, { useState, useEffect } from 'react';
+/*import { CheckCircleIcon } from '@heroicons/react/24/solid';*/
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Footer } from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { CaretRight } from '@phosphor-icons/react/dist/ssr/CaretRight';
 import { BagSimple, CaretDown, CaretLeft } from '@phosphor-icons/react/dist/ssr';
-import Link from 'next/link';
-import { useBag } from '../components/Bag';
+/*import { useBag } from '../components/Bag';*/
 import { motion } from 'framer-motion';
 
 const sizes = [
@@ -25,13 +24,13 @@ const images = [
 ];
 
 const YHWHshirtpage = () => {
-  const { addToBag } = useBag();
-  const [selectedSize, setSelectedSize] = useState(sizes[0]);
+  /*const { addToBag } = useBag();*/
+  /*const [selectedSize, setSelectedSize] = useState(sizes[0]);*/
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [showShippingDetails, setShowShippingDetails] = useState(false);
   const [showCareDetails, setShowCareDetails] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  /*const [isLoading, setIsLoading] = useState(true);*/
 
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
@@ -53,7 +52,7 @@ const YHWHshirtpage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const handleAddToBag = () => {
+  /*const handleAddToBag = () => {
     addToBag({
       id: "yhwh-tee",
       name: "YHWH TEE",
@@ -62,7 +61,7 @@ const YHWHshirtpage = () => {
       quantity: 1,
       image: images[0],
     });
-  };
+  };*/
 
   return (
     <>

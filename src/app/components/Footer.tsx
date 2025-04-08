@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import { AiOutlineYoutube } from 'react-icons/ai'
 import { BsInstagram } from 'react-icons/bs'
@@ -8,12 +9,12 @@ export const Footer = () => {
       <div className="footer-content">
         {/* Footer Menu */}
         <ul className="footer-menu">
-          <li><a href="/" className="footer-link">HOME</a></li>
-          <li><a href="/#about" className="footer-link">ABOUT</a></li>
-          <li><a href="/#sermons" className="footer-link">SERMONS</a></li>
-          <li><a href="/donate" className="footer-link">DONATE</a></li>
-          <li><a href="/apparel" className="footer-link">APPAREL</a></li>
-          <li><a href="/#visit" className="footer-link">VISIT</a></li>
+          <li><Link href="/" className="footer-link">HOME</Link></li>
+          <li><Link href="/#about" className="footer-link">ABOUT</Link></li>
+          <li><Link href="/#sermons" className="footer-link">SERMONS</Link></li>
+          <li><Link href="/donate" className="footer-link">DONATE</Link></li>
+          <li><Link href="/apparel" className="footer-link">APPAREL</Link></li>
+          <li><Link href="/#visit" className="footer-link">VISIT</Link></li>
           <li>
             <a href="https://www.youtube.com/@amazinggraceassembly" target="_blank" rel="noopener noreferrer" className="social-icon">
               <AiOutlineYoutube className="text-2xl" />

@@ -1,10 +1,10 @@
 "use client";
 import React from 'react';
-import { PiDotsSixLight } from "react-icons/pi";
+/*import { PiDotsSixLight } from "react-icons/pi";*/
 import { CaretCircleRight } from "@phosphor-icons/react/dist/ssr";
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { motion } from 'framer-motion'; // Import Framer Motion
 // Import Swiper styles
 import "swiper/css/bundle";

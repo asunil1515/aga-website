@@ -61,6 +61,7 @@ export const VisitUs = () => {
         alert("Failed to send message: " + result.error);
       }
     } catch (err) {
+      console.error("Contact form error:", err);
       alert("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
