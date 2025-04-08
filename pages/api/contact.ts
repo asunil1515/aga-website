@@ -1,9 +1,7 @@
 
-import 'dotenv/config';
 import nodemailer from 'nodemailer';
 import type { NextApiRequest, NextApiResponse } from 'next';
-// test-env.js
-require('dotenv').config();
+
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS);
 

@@ -4,9 +4,9 @@ import { Footer } from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { IoLogoVenmo, IoLogoPaypal } from "react-icons/io5";
+import { IoLogoVenmo } from "react-icons/io5";
 import { SiZelle } from "react-icons/si";
-import { FaCcApplePay } from "react-icons/fa6";
+/*import { FaCcApplePay } from "react-icons/fa6";*/
 import Head from "next/head";
 
 const DonatePage = () => {

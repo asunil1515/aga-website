@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { easeInOut, easeOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const HeroSection: React.FC = () => {
   return (

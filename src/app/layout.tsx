@@ -1,9 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Merriweather } from "next/font/google";
-import { Flex, Text, Button } from "@radix-ui/themes";
-import { Theme, ThemePanel } from "@radix-ui/themes";
-import Navbar from "./components/Navbar";
-import { Footer } from "./components/Footer";
 import { BagProvider } from './components/Bag'; // Add this import
 import "./globals.css";
 
