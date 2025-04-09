@@ -57,23 +57,23 @@ const About = () => {
         >
           <h3>WHAT TO EXPECT</h3>
           <p>
-            Amazing Grace Assembly is a Bible-based church located in Pearland,
-            Texas. We provide a combined South Indian (Malayalam) and English
-            service each Sunday morning along with various other services
-            throughout the week. Our church&apos;s goal is to see individuals
-            experience the Amazing Grace that saves lost and broken people
-            through a personal encounter with Jesus.
+            We are a multi-generational, Spirit-filled church where people from
+            all walks of life come together to encounter God. Expect heartfelt
+            worship, inspiring biblical teaching, and a supportive community
+            that encourages growth and connection. Whether you're new to the
+            faith or have walked with Jesus for years, you'll find a place to
+            belong.
           </p>
           <Link href="/#visit" className="about-button">
             Visit Us <CaretDoubleRight size={20} weight="bold" />
           </Link>
           <Image
-          src="/cross.jpg"
-          alt="Cross"
-          className="about-image"
-          width={500} // Add width
-          height={300} // Add height
-        />
+            src="/cross.jpg"
+            alt="Cross"
+            className="about-image"
+            width={500} // Add width
+            height={300} // Add height
+          />
         </motion.div>
       </div>
     </section>
