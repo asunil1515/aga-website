@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { BagProvider } from './components/Bag'; // Add this import
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 import Head from 'next/head';  // Import Head from next/head
 
