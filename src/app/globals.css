@@ -169,43 +169,48 @@ scrollbar-track {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 @media (min-width: 1025px) {
-  .navbar-opaque {
+  .navbar-opaque,
+  .YHWH.navbar-opaque {
     color: black !important;
-    
     z-index: 10000;
   }
-  
-  .navbar-opaque .nav-menu a {
+  .navbar-opaque .nav-menu a,
+  .YHWH.navbar-opaque .nav-menu a {
     color: black !important;
     font-weight: 480;
     transition: color 0.3s ease, transform 0.3s ease;
   }
-  
   .navbar-opaque .nav-menu a:hover {
-    color: rgb(240, 240, 240) !important;
+    color: rgb(131, 131, 131) !important;
   }
-  
-  .navbar-opaque.scrolled {
+  /* YHWH custom hover */
+  .YHWH.navbar-opaque .nav-menu a:hover {
+    color: rgb(140, 140, 140) !important;
+  }
+  /* Scrolled shared styles */
+  .navbar-opaque.scrolled,
+  .YHWH.navbar-opaque.scrolled {
     background-color: rgba(12, 12, 12, 0.97);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
-  
-  .navbar-opaque.scrolled .nav-menu a {
+  .navbar-opaque.scrolled .nav-menu a,
+  .YHWH.navbar-opaque.scrolled .nav-menu a {
     color: white !important;
   }
-  
-  .navbar-opaque.scrolled .nav-menu a:hover {
-    color: rgb(145, 145, 145) !important;
+  .navbar-opaque.scrolled .nav-menu a:hover,
+  .YHWH.navbar-opaque.scrolled .nav-menu a:hover {
+    color: rgb(182, 182, 182) !important;
   }
-  
-  .navbar-opaque.scrolled .social-icon {
+  .navbar-opaque.scrolled .social-icon,
+  .YHWH.navbar-opaque.scrolled .social-icon {
     color: var(--hp-button-hover) !important;
   }
-  
-  .navbar-opaque.scrolled .social-icon:hover {
+  .navbar-opaque.scrolled .social-icon:hover,
+  .YHWH.navbar-opaque.scrolled .social-icon:hover {
     color: var(--hp-button-hover) !important;
   }
 }
+
 @media (max-width: 1024px) {
   
   .navbar-content {

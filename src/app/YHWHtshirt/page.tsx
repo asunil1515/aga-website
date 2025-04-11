@@ -35,27 +35,39 @@ const YHWHshirtpage = () => {
 
   return (
     <>
-      <Navbar variant="opaque" showBagIcon={false} />
-      <TopStart/>
-      <motion.div
-  className="product-page product-page-opaque"
-  id="YHWH-tshirt"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  transition={{
-    duration: 1.,
-    ease: [0.42, 0, 1, 1], // easeInCubic: starts slow, ends fast
-  }}
->
+      <Navbar variant="YHWH" showBagIcon={false} />
 
+      <TopStart />
+      <motion.div
+        className="product-page product-page-opaque"
+        id="YHWH-tshirt"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{
+          duration: 1,
+          ease: [0.42, 0, 1, 1], // easeInCubic: starts slow, ends fast
+        }}
+      >
         <div className="product-container">
           <div className="product-gallery">
             <div className="main-image-container">
-              <button onClick={handlePrevImage} className="arrow-button left-arrow">
+              <button
+                onClick={handlePrevImage}
+                className="arrow-button left-arrow"
+              >
                 <CaretLeft size={30} />
               </button>
-              <Image src={images[currentImageIndex]} alt="YHWH-Tee" width={800} height={800} objectFit="contain" />
-              <button onClick={handleNextImage} className="arrow-button right-arrow">
+              <Image
+                src={images[currentImageIndex]}
+                alt="YHWH-Tee"
+                width={800}
+                height={800}
+                objectFit="contain"
+              />
+              <button
+                onClick={handleNextImage}
+                className="arrow-button right-arrow"
+              >
                 <CaretRight size={30} />
               </button>
             </div>
@@ -66,7 +78,14 @@ const YHWHshirtpage = () => {
                   className={`preview-wrapper ${index === currentImageIndex ? "selected" : ""}`}
                   onClick={() => setCurrentImageIndex(index)}
                 >
-                  <Image src={image} alt={`Preview ${index + 1}`} width={80} height={80} objectFit="contain" className="preview-image" />
+                  <Image
+                    src={image}
+                    alt={`Preview ${index + 1}`}
+                    width={80}
+                    height={80}
+                    objectFit="contain"
+                    className="preview-image"
+                  />
                 </div>
               ))}
             </div>
@@ -89,10 +108,16 @@ const YHWHshirtpage = () => {
             </div>
 
             {/* Description Section */}
-            <div className={`collapsible-section description ${showFullDescription ? "expanded" : ""}`}>
+            <div
+              className={`collapsible-section description ${showFullDescription ? "expanded" : ""}`}
+            >
               <h3>Description</h3>
               <p>
-                One shirt, to glorify one name. This tee, inspired by The Burning Bush in Exodus 3, highlights the moment God reveals His name, YHWH—&quot;I AM WHO I AM.&quot; The design reflects the power of YHWH, the divine identity that calls, sustains, and leads.
+                One shirt, to glorify one name. This tee, inspired by The
+                Burning Bush in Exodus 3, highlights the moment God reveals His
+                name, YHWH—&quot;I AM WHO I AM.&quot; The design reflects the
+                power of YHWH, the divine identity that calls, sustains, and
+                leads.
               </p>
               <AnimatePresence>
                 {showFullDescription && (
@@ -101,14 +126,22 @@ const YHWHshirtpage = () => {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{
-                      opacity: { duration: 0.3 },  // Adjust opacity duration
-                      height: { duration: 0.3 }    // Adjust height duration
+                      opacity: { duration: 0.3 }, // Adjust opacity duration
+                      height: { duration: 0.3 }, // Adjust height duration
                     }}
                     style={{ overflow: "hidden" }} // prevents ghost text during height collapse
                   >
-                    This is more than just a t-shirt, it&apos;s a conversation starter. He is still the same God that Moses encountered. Rep your God boldly. Let it be a reminder that every moment is an opportunity to release His presence, bringing hope, healing, and revival to a world in need, in style :) <br />
+                    This is more than just a t-shirt, it&apos;s a conversation
+                    starter. He is still the same God that Moses encountered.
+                    Rep your God boldly. Let it be a reminder that every moment
+                    is an opportunity to release His presence, bringing hope,
+                    healing, and revival to a world in need, in style :) <br />
                     <br />
-                    6.1 oz of 100% ringspun cotton, the Comfort Colors C1717 heavyweight RS t-shirt offers sought-after quality, fashion, and comfort. Preshrunk, soft-washed, and made using garment-dyed fabric. This t-shirt is true to size, we recommend sizing up.
+                    6.1 oz of 100% ringspun cotton, the Comfort Colors C1717
+                    heavyweight RS t-shirt offers sought-after quality, fashion,
+                    and comfort. Preshrunk, soft-washed, and made using
+                    garment-dyed fabric. This t-shirt is true to size, we
+                    recommend sizing up.
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -119,9 +152,15 @@ const YHWHshirtpage = () => {
 
             {/* Shipping Details Section */}
             <div className="collapsible-section">
-              <button className="collapsible-button" onClick={toggleShippingDetails}>
+              <button
+                className="collapsible-button"
+                onClick={toggleShippingDetails}
+              >
                 <span>Shipping Details</span>
-                <CaretDown size={40} className={`caret-icon ${showShippingDetails ? "rotate" : ""}`} />
+                <CaretDown
+                  size={40}
+                  className={`caret-icon ${showShippingDetails ? "rotate" : ""}`}
+                />
               </button>
               <AnimatePresence>
                 {showShippingDetails && (
@@ -133,7 +172,9 @@ const YHWHshirtpage = () => {
                     transition={{ duration: 0.3 }}
                     className="collapsible-content"
                   >
-                    Shipping is about $5. However, if you&apos;re attending the Worship Night on April 26th, you can opt for free pickup at the event!
+                    Shipping is about $5. However, if you&apos;re attending the
+                    Worship Night on April 26th, you can opt for free pickup at
+                    the event!
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -141,9 +182,15 @@ const YHWHshirtpage = () => {
 
             {/* Care Instructions Section */}
             <div className="collapsible-section">
-              <button className="collapsible-button" onClick={toggleCareDetails}>
+              <button
+                className="collapsible-button"
+                onClick={toggleCareDetails}
+              >
                 <span>Care</span>
-                <CaretDown size={40} className={`caret-icon ${showCareDetails ? "rotate" : ""}`} />
+                <CaretDown
+                  size={40}
+                  className={`caret-icon ${showCareDetails ? "rotate" : ""}`}
+                />
               </button>
               <AnimatePresence>
                 {showCareDetails && (
@@ -155,7 +202,10 @@ const YHWHshirtpage = () => {
                     transition={{ duration: 0.3 }}
                     className="collapsible-content"
                   >
-                    We recommend washing these garments in cold water with like-colored garments, as some of the pigment dyes may stain light or white-colored garments. Dry in low heat to prevent excessive shrinkage.
+                    We recommend washing these garments in cold water with
+                    like-colored garments, as some of the pigment dyes may stain
+                    light or white-colored garments. Dry in low heat to prevent
+                    excessive shrinkage.
                   </motion.p>
                 )}
               </AnimatePresence>

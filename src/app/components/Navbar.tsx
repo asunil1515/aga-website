@@ -8,7 +8,7 @@ import { HiOutlineMenu, HiX } from "react-icons/hi";
 import { useBag } from "../components/Bag";
 
 interface NavbarProps {
-  variant?: "transparent" | "opaque";
+  variant?: "transparent" | "opaque" | "YHWH";
   showBagIcon?: boolean;
   className?: string;
 }
@@ -53,11 +53,16 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const navbarClasses = [
     "navbar",
-    variant === "opaque" ? "navbar-opaque" : "",
+    variant === "YHWH"
+      ? "YHWH navbar-opaque"
+      : variant === "opaque"
+      ? "navbar-opaque"
+      : "",
     isScrolled ? "scrolled" : "",
   ]
     .filter(Boolean)
     .join(" ");
+  
 
   return (
     <nav className={navbarClasses}>
