@@ -8,6 +8,7 @@ import { IoLogoVenmo } from "react-icons/io5";
 import { SiZelle } from "react-icons/si";
 /*import { FaCcApplePay } from "react-icons/fa6";*/
 import Head from "next/head";
+import TopStart from "../components/TopStart";
 
 const DonatePage = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -27,6 +28,7 @@ const DonatePage = () => {
         <link rel="preload" href="/BG1.jpg" as="image" />
       </Head>
       <Navbar />
+      <TopStart/>
       <div className="donate-page">
         <Image
           alt="Donation Background"

@@ -4,6 +4,7 @@ import { Footer } from "../components/Footer";
 import Navbar from "../components/Navbar";
 import MainContent from "../ap-components/MainContent";
 import IntroScreen from "../ap-components/Intropg";
+import TopStart from "../components/TopStart";
 
 /*function useScrollLock() {
   const [isLocked, setIsLocked] = useState(false);
@@ -37,7 +38,7 @@ export default function ApparelPage() {
 
   return (
     <>
-        
+      <TopStart/>
       <div className="apparel-page">
         {/* Show Navbar only when main content is visible */}
         {showMainContent && <Navbar variant="opaque" showBagIcon={false} />}

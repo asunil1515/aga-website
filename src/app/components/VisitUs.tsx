@@ -80,7 +80,7 @@ export const VisitUs = () => {
           className="collapsible-heading"
           onClick={() => setIsShow(!isShow)}
           whileHover={{ color: "var(--hp-button-hover)" }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: 0.3 }}
         >
           <span>{title}</span>
           <CaretDown

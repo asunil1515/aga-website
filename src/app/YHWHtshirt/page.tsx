@@ -1,49 +1,29 @@
 "use client";
-/*import { CheckCircleIcon } from '@heroicons/react/24/solid';*/
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { Footer } from '../components/Footer';
-import Navbar from '../components/Navbar';
-import { CaretRight } from '@phosphor-icons/react/dist/ssr/CaretRight';
-import { BagSimple, CaretDown, CaretLeft } from '@phosphor-icons/react/dist/ssr';
-/*import { useBag } from '../components/Bag';*/
-import { motion } from 'framer-motion';
-
-/* const sizes = [
-  { name: 'Medium', price: '$20' },
-  { name: 'Large', price: '$20' },
-  { name: 'XL', price: '$20' },
-  { name: '2XL', price: '$40' },
-]; */
-
+import React, { useState } from "react";
+import Image from "next/image";
+import { Footer } from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { CaretRight } from "@phosphor-icons/react/dist/ssr/CaretRight";
+import { BagSimple, CaretDown, CaretLeft } from "@phosphor-icons/react/dist/ssr";
+import { motion, AnimatePresence } from "framer-motion"; // Import motion and AnimatePresence
+import TopStart from "../components/TopStart";
 
 const images = [
-  '/shirt1.png',
-  '/shirt2.png', 
-  '/shirt5.png',
-  '/shirt6.png',
+  "/shirt1.png",
+  "/shirt2.png",
+  "/shirt5.png",
+  "/shirt6.png",
 ];
 
 const YHWHshirtpage = () => {
-  /*const { addToBag } = useBag();*/
-  /*const [selectedSize, setSelectedSize] = useState(sizes[0]);*/
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [showShippingDetails, setShowShippingDetails] = useState(false);
   const [showCareDetails, setShowCareDetails] = useState(false);
-  /*const [isLoading, setIsLoading] = useState(true);*/
 
-  const toggleDescription = () => {
-    setShowFullDescription(!showFullDescription);
-  };
-
-  const toggleShippingDetails = () => {
-    setShowShippingDetails(!showShippingDetails);
-  };
-
-  const toggleCareDetails = () => {
-    setShowCareDetails(!showCareDetails);
-  };
+  const toggleDescription = () => setShowFullDescription(!showFullDescription);
+  const toggleShippingDetails = () => setShowShippingDetails(!showShippingDetails);
+  const toggleCareDetails = () => setShowCareDetails(!showCareDetails);
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -53,48 +33,29 @@ const YHWHshirtpage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  /*const handleAddToBag = () => {
-    addToBag({
-      id: "yhwh-tee",
-      name: "YHWH TEE",
-      size: selectedSize.name,
-      price: 20,
-      quantity: 1,
-      image: images[0],
-    });
-  };*/
-
   return (
     <>
       <Navbar variant="opaque" showBagIcon={false} />
+      <TopStart/>
       <motion.div
-        className="product-page product-page-opaque"
-        id="YHWH-tshirt"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.4 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
+  className="product-page product-page-opaque"
+  id="YHWH-tshirt"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{
+    duration: 1.,
+    ease: [0.42, 0, 1, 1], // easeInCubic: starts slow, ends fast
+  }}
+>
+
         <div className="product-container">
           <div className="product-gallery">
             <div className="main-image-container">
-              <button
-                onClick={handlePrevImage}
-                className="arrow-button left-arrow"
-              >
+              <button onClick={handlePrevImage} className="arrow-button left-arrow">
                 <CaretLeft size={30} />
               </button>
-              <Image
-                src={images[currentImageIndex]}
-                alt="YHWH-Tee"
-                width={800}
-                height={800}
-                objectFit="contain"
-              />
-              <button
-                onClick={handleNextImage}
-                className="arrow-button right-arrow"
-              >
+              <Image src={images[currentImageIndex]} alt="YHWH-Tee" width={800} height={800} objectFit="contain" />
+              <button onClick={handleNextImage} className="arrow-button right-arrow">
                 <CaretRight size={30} />
               </button>
             </div>
@@ -105,14 +66,7 @@ const YHWHshirtpage = () => {
                   className={`preview-wrapper ${index === currentImageIndex ? "selected" : ""}`}
                   onClick={() => setCurrentImageIndex(index)}
                 >
-                  <Image
-                    src={image}
-                    alt={`Preview ${index + 1}`}
-                    width={80}
-                    height={80}
-                    objectFit="contain"
-                    className="preview-image"
-                  />
+                  <Image src={image} alt={`Preview ${index + 1}`} width={80} height={80} objectFit="contain" className="preview-image" />
                 </div>
               ))}
             </div>
@@ -134,65 +88,77 @@ const YHWHshirtpage = () => {
               </a>
             </div>
 
-            <div
-              className={`collapsible-section description ${showFullDescription ? "expanded" : ""}`}
-            >
+            {/* Description Section */}
+            <div className={`collapsible-section description ${showFullDescription ? "expanded" : ""}`}>
               <h3>Description</h3>
               <p>
-                One shirt, to glorify one name. This tee, inspired by The
-                Burning Bush in Exodus 3, highlights the moment God reveals His
-                name, YHWH—&quot;I AM WHO I AM.&quot; The design reflects the power of
-                YHWH, the divine identity that calls, sustains, and leads.
+                One shirt, to glorify one name. This tee, inspired by The Burning Bush in Exodus 3, highlights the moment God reveals His name, YHWH—&quot;I AM WHO I AM.&quot; The design reflects the power of YHWH, the divine identity that calls, sustains, and leads.
               </p>
-              {showFullDescription && (
-                <p>
-                  This is more than just a t-shirt, it&apos;s a conversation starter.
-                  He is still the same God that Moses encountered. Rep your God
-                  boldly. Let it be a reminder that every moment is an
-                  opportunity to release His presence, bringing hope, healing,
-                  and revival to a world in need, in style :) <br />
-                  <br />
-                  6.1 oz of 100% ringspun cotton, the Comfort Colors C1717
-                  heavyweight RS t-shirt offers sought-after quality, fashion,
-                  and comfort. Preshrunk, soft-washed and made using
-                  garment-dyed fabric. This t-shirt is true to size, we
-                  recommend sizing up.
-                </p>
-              )}
+              <AnimatePresence>
+                {showFullDescription && (
+                  <motion.p
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{
+                      opacity: { duration: 0.3 },  // Adjust opacity duration
+                      height: { duration: 0.3 }    // Adjust height duration
+                    }}
+                    style={{ overflow: "hidden" }} // prevents ghost text during height collapse
+                  >
+                    This is more than just a t-shirt, it&apos;s a conversation starter. He is still the same God that Moses encountered. Rep your God boldly. Let it be a reminder that every moment is an opportunity to release His presence, bringing hope, healing, and revival to a world in need, in style :) <br />
+                    <br />
+                    6.1 oz of 100% ringspun cotton, the Comfort Colors C1717 heavyweight RS t-shirt offers sought-after quality, fashion, and comfort. Preshrunk, soft-washed, and made using garment-dyed fabric. This t-shirt is true to size, we recommend sizing up.
+                  </motion.p>
+                )}
+              </AnimatePresence>
               <button className="read-more-button" onClick={toggleDescription}>
                 {showFullDescription ? "Read Less" : "Read More"}
               </button>
             </div>
 
+            {/* Shipping Details Section */}
             <div className="collapsible-section">
               <button className="collapsible-button" onClick={toggleShippingDetails}>
                 <span>Shipping Details</span>
-                <CaretDown size={40} className="caret-icon" />
+                <CaretDown size={40} className={`caret-icon ${showShippingDetails ? "rotate" : ""}`} />
               </button>
-
-              {showShippingDetails && (
-                <p className="collapsible-content">
-                  Shipping is $5. However, if you&apos;re attending the Worship Night on April 26th, you can opt for free pickup at the event.
-                </p>
-              )}
+              <AnimatePresence>
+                {showShippingDetails && (
+                  <motion.p
+                    key="shipping"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="collapsible-content"
+                  >
+                    Shipping is about $5. However, if you&apos;re attending the Worship Night on April 26th, you can opt for free pickup at the event!
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
 
+            {/* Care Instructions Section */}
             <div className="collapsible-section">
-              <button
-                className="collapsible-button"
-                onClick={toggleCareDetails}
-              >
+              <button className="collapsible-button" onClick={toggleCareDetails}>
                 <span>Care</span>
-                <CaretDown size={40} className="caret-icon" />
+                <CaretDown size={40} className={`caret-icon ${showCareDetails ? "rotate" : ""}`} />
               </button>
-              {showCareDetails && (
-                <p className="collapsible-content">
-                  We recommend washing these garments in cold water with
-                  like-colored garments, as some of the pigment dyes may stain
-                  light or white colored garments. Dry in low heat to prevent
-                  excessive shrinkage.
-                </p>
-              )}
+              <AnimatePresence>
+                {showCareDetails && (
+                  <motion.p
+                    key="care"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="collapsible-content"
+                  >
+                    We recommend washing these garments in cold water with like-colored garments, as some of the pigment dyes may stain light or white-colored garments. Dry in low heat to prevent excessive shrinkage.
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -205,7 +171,8 @@ const YHWHshirtpage = () => {
 
 export default YHWHshirtpage;
 
-/*full sclae shoppning*/
+
+/*full sclae shopping*/
 
 /*"use client";
 import { RadioGroup } from '@headlessui/react';

@@ -80,7 +80,7 @@ scrollbar-track {
 /* Navbar */
 .navbar {
   background-color: transparent;
-  padding: 1.25rem 1rem; /* Reduced padding */
+  padding: 0.25rem 1rem; /* Reduced padding */
   position: fixed;
   width: 100%;
   top: 0;
@@ -118,6 +118,9 @@ scrollbar-track {
 .nav-menu a {
   color: white;
   text-decoration: none;
+  padding: 2.25rem 0rem;
+  margin-top: -1.1rem;
+  margin-bottom: -1.4rem;
   font-size: 0.9rem; /* Reduced font size */
   display: inline-block;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -138,10 +141,10 @@ scrollbar-track {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .social-icon .y1{
-  transform: translateY(-0.8px);
+  transform: translateY(-3px);
 }
 .social-icon .i1{
-  transform: translateY(1.75px);
+  transform: translateY(-0px);
 }
 .social-icon:hover {
   color: gray;
@@ -168,18 +171,18 @@ scrollbar-track {
 @media (min-width: 1025px) {
   .navbar-opaque {
     color: black !important;
-    transition: all 0.3s ease-in-out;
+    
     z-index: 10000;
   }
   
   .navbar-opaque .nav-menu a {
     color: black !important;
     font-weight: 480;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
   }
   
   .navbar-opaque .nav-menu a:hover {
-    color: rgb(199, 199, 199) !important;
+    color: rgb(240, 240, 240) !important;
   }
   
   .navbar-opaque.scrolled {
@@ -1057,17 +1060,14 @@ scrollbar-track {
   text-align: center;
   padding: 1.7rem 0;
 }
-
 .visit h2 {
   margin: 0.8rem auto 1rem;
   font-size: 2rem;
   font-weight: 700;
 }
-
 .visit p {
   margin-bottom: 1rem;
 }
-
 .visit iframe {
   width: 98.8vw;
   position: relative;
@@ -1075,13 +1075,11 @@ scrollbar-track {
   transform: translate(-50%, 2rem);
   height: 35vw;
 }
-
 .visit .max-w-5xl {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
 }
-
 /* Visit Content Container */
 .visit-content {
   display: flex;
@@ -1090,13 +1088,11 @@ scrollbar-track {
   max-width: 1000px;
   margin: 4rem auto 0.5rem;
 }
-
 /* Service Times and Upcoming Sections */
 .service-and-upcoming-structure {
   text-align: left;
   width: 100%;
 }
-
 .contactus-structure {
   width: 100%;
   margin-top: -0.9rem;
@@ -1105,16 +1101,12 @@ scrollbar-track {
   justify-content: center;
   flex-direction: column;
 }
-
-
 .service {
   font-weight: 650;
 }
-
 .time {
   text-align: right;
 }
-
 /* Upcoming Events */
 .servicetimes,
 .upcoming {
@@ -1141,13 +1133,11 @@ scrollbar-track {
   max-width: 400px;
   margin-bottom: 5rem;
 }
-
 .upcoming .date {
   font-weight: 700;
   margin-right: 10px;
   white-space: nowrap; /* Prevents date from wrapping */
 }
-
 .upcoming .event {
   text-decoration: underline;
   position: relative;
@@ -1155,12 +1145,10 @@ scrollbar-track {
   overflow: hidden;
   text-overflow: ellipsis; /* Adds ellipsis if text is too long */
 }
-
 .event:hover {
   color: var(--hp-button-hover);
   transition: color 0.3s ease;
 }
-
 /* Collapsible Heading */
 .collapsible-heading {
   display: flex;
@@ -1173,26 +1161,21 @@ scrollbar-track {
   margin: 0 auto;
   padding: 0.5rem 3rem;
 }
-
 .collapsible-heading span {
   flex-grow: 1;
   text-align: left;
 }
-
 .collapsible-heading:hover {
   color: var(--hp-button-hover);
   transition: color 0.3s ease;
 }
-
 .collapsible-heading svg {
   margin-left: auto;
   transition: transform 0.3s ease;
 }
-
 .collapsible-heading svg.rotate {
   transform: rotate(-180deg);
 }
-
 /* Contact Us Form */
 .contactus {
   text-align: center;
@@ -1200,7 +1183,6 @@ scrollbar-track {
   max-width: 500px;
   margin: 0.5rem auto;
 }
-
 .contact-input {
   display: block;
   width: 100%;
@@ -1213,17 +1195,14 @@ scrollbar-track {
   border-radius: 5px;
   text-align: left;
 }
-
 .contactus .message {
   height: 10rem;
   resize: vertical;
 }
-
 .contact-input::placeholder {
   color: rgb(231, 231, 231);
   font-weight: 400;
 }
-
 .contact-btn {
   margin-top: 0.8rem;
   margin-bottom: 3.5rem;
@@ -1242,17 +1221,14 @@ scrollbar-track {
     padding: 1.3rem 1rem;
     text-align: center;
   }
-
   .visit h2 {
     font-size: 1.5rem;
     margin-top: var(--mobile-h3-margin-top);
     margin: 0;
   }
-
   .visit .title {
     margin-bottom: 0.5rem;
   }
-
   .visit p,
   .service-and-upcoming-structure,
   .contactus-structure,
@@ -1261,7 +1237,6 @@ scrollbar-track {
   .visit .contactus {
     font-size: var(--mobile-p-font-size);
   }
-
   .visit iframe {
     width: 100vw;
     min-height: 40vh;
@@ -1269,12 +1244,10 @@ scrollbar-track {
     margin-top: -0.5rem;
     margin-bottom: 2rem;
   }
-
   .visit-content {
     max-width: 76vw;
     margin: 1.5rem auto; /* Centering the content */
   }
-
   .visit .collapsible-heading {
     font-size: var(--mobile-h3-font-size);
     padding: 0.25rem 0.75rem;
@@ -1282,14 +1255,12 @@ scrollbar-track {
     gap: 0rem;
     margin: 0 auto; /* Centering the collapsible heading */
   }
-
   .visit .collapsible-heading svg {
     margin-bottom: 0rem;
     margin-left: 0.5rem;
     width: 1.2rem; /* Adjusted size */
     height: 1.2rem; /* Adjusted size */
   }
-
   /* Center and limit width of left/right containers */
   .service-and-upcoming-structure,
   .contactus-structure {
@@ -1299,7 +1270,6 @@ scrollbar-track {
     margin: 0 auto;
     max-width: 280px;
   }
-
   .visit .servicetimes,
   .visit .upcoming {
     width: clamp(1rem,60vw,14rem);
@@ -1309,15 +1279,12 @@ scrollbar-track {
     margin-bottom: 1.5rem; /*p bottom spacing*/
     padding: 0;
   }
-  
   .service {
     text-decoration: none;
   }
-
   .date {
     text-decoration: none;
   }
-
   .visit .servicetimes p,
   .visit .upcoming p {
     display: flex;
@@ -1325,25 +1292,21 @@ scrollbar-track {
     margin-bottom: 0.05rem; /* Space between service name and time */
     text-align: center; /* Align items vertically centered */
   }
-
   .visit .contactus {
     margin: 1rem auto; /* Centering the contact us section */
     width: 90%;
     max-width: 360px;
     text-align: center;
   }
-
   .contactus .message {
     height: 7rem; 
   }
-
   .contact-input {
     font-size: var(--mobile-p-font-size);
     padding: 0.5rem;
     width: 100%;
     margin-bottom: 0.75rem;
   }
-
   .contact-btn,
   .upcoming-btn {
     font-size: var(--mobile-p-font-size);
@@ -1356,7 +1319,6 @@ scrollbar-track {
     width: auto;
     margin: 0 auto; /* Centering buttons */
   }
-
   .contact-input::placeholder {
     color: rgba(255, 255, 255, 0.8);
   }
@@ -2062,7 +2024,6 @@ scrollbar-track {
   margin-bottom: 1.75rem;
 }
 /* Button container */
-/* Button container */
 .main-content .t-shirt {
   background-color: rgb(61, 61, 61);
   font-size: 1.2rem;
@@ -2081,12 +2042,10 @@ scrollbar-track {
   position: relative;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 .main-content .t-shirt:hover {
   background-color: rgb(160, 160, 160);
   transform: scale(1.025);
 }
-
 /* Pulsing wave effect */
 .main-content .t-shirt:before {
   content: '';
@@ -2101,11 +2060,9 @@ scrollbar-track {
   animation: pulse-wave 2.5s ease-out infinite; /* Slower pulse */
   opacity: 0;
 }
-
 .main-content .t-shirt:hover:before {
   opacity: 1; /* Make the wave visible on hover */
 }
-
 /* Animation for the wave */
 @keyframes pulse-wave {
   0% {
@@ -2121,7 +2078,6 @@ scrollbar-track {
     opacity: 0;
   }
 }
-
 .main-content .t-shirt:active {
   transform: scale(1);
 }
@@ -2526,6 +2482,12 @@ scrollbar-track {
   cursor: default; /* Prevents the cursor from changing on hover */
   user-select: none; /* Prevents text selection */
 }
+.collapsible-section .caret-icon {
+  transition: transform 0.3s ease;
+}
+.collapsible-section .caret-icon.rotate {
+  transform: rotate(-180deg);
+}
 /*
 .speacialfont {
   font-size: 3rem; 
@@ -2553,6 +2515,7 @@ scrollbar-track {
   padding: 0;
   cursor: pointer;
 }
+
 .collapsible-content {
   width: 100%; /* Ensure full width */
   text-align: left; /* Align text to the left */
@@ -3285,7 +3248,7 @@ scrollbar-track {
   transform: translateX(-50%) translateY(-50%); /* Center it horizontally and vertically */
   pointer-events: none; /* Prevent interaction with the icon */
   z-index: 1; /* Ensure it's behind content */
-  transition: width 1.0s ease-out; /* Smooth transition for width */
+   /* Smooth transition for width */
 }
 .footer .copyright {
   color: var(--hp-button-color);

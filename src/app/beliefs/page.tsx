@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ScrollToTop from "../components/TopStart";
 
 // Beliefs data array
 const beliefs = [
@@ -60,6 +61,7 @@ const OurBeliefs = () => {
         <link rel="preload" href="/BG1.jpg" as="image" />
       </Head>
       <Navbar />
+      <ScrollToTop />
       <div className="beliefs-page">
         {/* Static background image */}
         <div className="beliefs-background">
