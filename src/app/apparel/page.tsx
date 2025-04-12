@@ -26,32 +26,23 @@ export default function ApparelPage() {
   const [showMainContent, setShowMainContent] = useState(false);
 
   useEffect(() => {
-    // Set a timeout to transition away the intro screen after 3 seconds
     const timer = setTimeout(() => {
       setShowMainContent(true);
-    }, 900); // Change to a reasonable delay
+      window.scrollTo({ top: 0, behavior: 'auto' }); // 👈 scroll here
+    }, 900);
 
-    return () => clearTimeout(timer); // Cleanup the timer
+    return () => clearTimeout(timer);
   }, []);
-
-
 
   return (
     <>
-      <TopStart/>
       <div className="apparel-page">
-        {/* Show Navbar only when main content is visible */}
         {showMainContent && <Navbar variant="opaque" showBagIcon={false} />}
-        
-        {/* Import and render the IntroScreen component */}
         <IntroScreen className={showMainContent ? "shrink" : ""} />
-        
-        {/* Render MainContent */}
         <MainContent showMainContent={showMainContent} />
       </div>
       <Footer />
     </>
   );
 }
-
 
