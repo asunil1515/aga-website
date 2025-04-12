@@ -329,7 +329,7 @@ scrollbar-track {
 .hero h1 {
   font-size: 3.5rem;
   font-weight: 720;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   display: block; /* Block for full width */
   line-height: 1.11;
   letter-spacing: 0.3px;
@@ -337,17 +337,16 @@ scrollbar-track {
   text-align: center;
   width: 100%; /* Ensure h1 takes up full width */
 }
-
 /* Hero h1 minus-icon */
 .hero h1 .minus-icon {
   display: block;
   background-color: rgb(255, 255, 255); /* Line color */
   width: 100%; /* This will stretch the line to match the h1 width */
-  max-width: 640px; /* Limits width of the line */
+  max-width: clamp(500px,40vw,505px); /* Limits width of the line */
   height: 2.1px; /* Line thickness */
   position: absolute; /* Position relative to h1 *//* Slightly below the h1 text */
   left: 50%; /* Position at the center horizontally */
-  transform: translateX(-50%)translateY(1.2rem); /* Center horizontally */
+  transform: translateX(-50%)translateY(0.75rem); /* Center horizontally */
   transition: width 1.0s ease-out;
 }
 /* Hero Paragraph */
@@ -405,8 +404,8 @@ scrollbar-track {
     display: flex;
     justify-content: center;  /* Horizontally center */
     align-items: center;      /* Vertically center */
-    transform: translate(-50%, 380%); /* Adjust vertical and horizontal positioning */
-    height: 2px;              /* Slightly thinner for mobile */
+    transform: translate(-50%, 590%); /* Adjust vertical and horizontal positioning */
+    height: 1.4px;              /* Slightly thinner for mobile */
     max-width: clamp(5rem, 69vw, 27.25rem); /* Set max width */
   }
   .hero p {

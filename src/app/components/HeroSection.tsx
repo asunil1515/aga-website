@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{
-              duration: 2, // Keep the longer duration for the slow deceleration
+              duration: 2.0, // Keep the longer duration for the slow deceleration
               ease: [0.68, -0.55, 0.27, 1.55], // Fast start and slow deceleration
               delay: 0.1, // Delay to synchronize with the h1 animation
             }}
