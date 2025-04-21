@@ -17,10 +17,8 @@ export default function Home() {
          <About />
          <OurPastor />
          <Community />
-         {/* <ServiceTimes />*/}
          <VisitUs />
          <Footer /> 
     </div>
-
   );
 }

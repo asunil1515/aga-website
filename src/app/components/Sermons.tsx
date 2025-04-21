@@ -10,7 +10,7 @@ export const Sermons = () => {
         initial={{ opacity: 0, y: -100 }} // Start off-screen to the left
         whileInView={{ opacity: 1, y: 0 }} // Slide into the viewport from the left
         transition={{ duration: 1.0 }} // Smooth transition
-        src="https://www.youtube.com/embed/oXH9fG3F9pE?si=_xdNfbseE5ozCX9i"
+        src="https://www.youtube.com/embed/nzzvS_qPtt0?si=MxwYQrhz4POGx6Td"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
