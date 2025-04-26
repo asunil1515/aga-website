@@ -1652,7 +1652,23 @@ scrollbar-track {
   align-items: center;
 }
 /* Staggered Animation with Delays for Each Button */
-.option-button {
+.option-base  {
+  width: 22rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 5px;
+  display: inline-flex; /* change from flex to inline-flex to respect scale */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  transform-origin: center; /* ensures scaling is centered */
+}
+.option-button  {
   width: 22rem;
   padding: 1rem;
   margin-bottom: 2rem;
@@ -1669,6 +1685,9 @@ scrollbar-track {
   transition: transform 0.3s ease, filter 0.3s ease;
   transform-origin: center; /* ensures scaling is centered */
 }
+.option-button:hover{
+  filter: brightness(0.8);
+}
 .email-container {
   display: flex;
   justify-content: space-between;
@@ -1679,65 +1698,156 @@ scrollbar-track {
   margin-bottom: 1rem;
 }
 
-.copy-section {
-  position: relative;
-}
-
-.copy-button {
+.zelle-modal {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  justify-content: center;
+  text-align: center;
+  background: rgba(108, 28, 213, 0.9);
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  pointer-events: none;
+  width: 22rem;
 }
 
-.copy-button:hover {
-  background-color: #0056b3;
+.zelle-modal * {
+  pointer-events: auto;
 }
 
-.tooltip {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(50%);
-  background-color: #28a745;
+.zelle-modal-header {
+  margin-bottom: 1rem;
+}
+
+.zelle-modal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   color: white;
-  padding: 0.5rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  z-index: 10;
+}
+
+.zelle-subtitle {
+  font-style: italic;
+  color: white;
+  font-size: 0.95rem !important;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem !important;
+  text-align: center;
+  display: block;        /* Makes sure it behaves like a block */
+  width: 100%;           /* Full width so text-align center works properly */
+}
+
+
+.zelle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  align-items: center;
 }
 
 .zelle-info {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background-color: #e9ecef;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 0.85rem;
+  box-sizing: border-box; /* Ensures padding doesn’t cause overflow */
+}
+.zelle-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Ensures child elements like the close button are centered */
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
 }
 
-.zelle-info .info-icon {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  color: #17a2b8;
+.email-labels {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
-.option-button:hover {
-  filter: brightness(0.85);
+
+.email-labels span {
+  font-weight: 700; /* Regular weight for account name */
+}
+
+.email-labels strong {
+  font-weight: 400; /* Bold weight for email */
+}
+
+.zelle-modal .copy-email-button {
+  background: #fff;
+  color: #6c1cd5;
+  border: none;
+  border-radius: 4px;
+  padding: 0.45rem 0.6rem !important;  /* Reduced vertical padding */
+  cursor: pointer;
+  display: inline-flex;  /* Aligns with the parent layout better */
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-sizing: border-box;  /* Ensures padding fits within the button */
+  width: auto;  /* Allow width to be determined by content */
+  height: auto;  /* Allow height to be determined by padding */
+   /* Ensure button is not too narrow */
+}
+
+
+
+.close-button {
+  margin-top: 1rem;
+  background: #fff;
+  color: #6c1cd5;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: auto; /* Ensures the button width is dynamic */
+  text-align: center; /* Ensures the text inside the button is centered */
+}
+
+
+.close-button:hover {
+  background-color: #c3b5d9;
+}
+.copy-email-button:hover {
+  background-color: #c3b5d9;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 110%; /* just above the button */
+  left: 90%;
+  transform: translateX(-50%);
+  background: #f5f5f5;
+  color: #6c1cd5;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
+  white-space: nowrap;
+  animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
 }
 .button-text {
   pointer-events: none;
 }
 .icon {
   position: absolute;
-  right: 1.2rem; /* better than hardcoding based on width */
-  font-size: 1.7rem;
+  right: 1.2rem; 
+    font-size: 1.7rem;
 }
 /* Button colors */
 .donation-options .venmo {
@@ -1749,6 +1859,7 @@ scrollbar-track {
 .donation-options .applepay {
   background-color: #000000;
 }
+
 @media (max-width: 1024px) {
   /* Full-page Background for Mobile */
   .donate-page {
@@ -1847,6 +1958,26 @@ scrollbar-track {
   }
 
   /* Staggered Animation with Delays for Each Button */
+  .option-base {/*zelle*/
+    margin-bottom: 2rem;
+    color: white;
+    border: none;
+    white-space: nowrap;
+    padding: clamp(0.25rem, 1.75vh, 0.8rem) 
+           clamp(0.5rem, 26vw, 9.5rem); 
+    font-size: clamp(0.6rem, 3.5vw, 1.1rem);
+    width: clamp(0.5rem, 26vw, 7.5rem);/* Ensure the button occupies 100% width of its parent */
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex; /* Use flex for proper alignment and stretching */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    transform-origin: center; /* Ensures scaling is centered */
+    box-sizing: border-box; /* Includes padding and border in width calculation */
+  }
   .option-button {
     margin-bottom: 2rem;
     color: white;
@@ -1867,9 +1998,6 @@ scrollbar-track {
     transform-origin: center; /* Ensures scaling is centered */
     box-sizing: border-box; /* Includes padding and border in width calculation */
   }
-  .option-button:hover {
-    filter: brightness(0.85);
-  }
   .button-text {
     pointer-events: none;
   }
@@ -1878,6 +2006,97 @@ scrollbar-track {
     right: 1.2rem; /* better than hardcoding based on width */
     font-size: clamp(1.5rem, 5vw, 1.7rem);
   }
+  .zelle-modal {
+    width: 100%;
+    max-width: 22rem;
+    padding: 1rem 1rem; /* Slightly increased padding for content */
+    border-radius: 8px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Center it */
+  }
+  
+  .zelle-modal-content {
+    gap: 0rem; /* Reduced gap between elements */
+    width: 100%;
+  }
+  
+  .zelle-info {
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 0.25rem; /* Decreased gap between email and button */
+    padding: 0.25rem 0.75rem; /* Reduced padding inside */
+    font-size: clamp(0.65rem, 2.5vw, 0.9rem); /* Slightly smaller font */
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .zelle-modal-title {
+    font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+    
+    margin-top: 0rem !important; /* Ensures it's applied */
+  }
+  
+  .zelle-subtitle {
+    font-size: clamp(0.65rem, 1.5vw, 0.9rem) !important;
+    width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 0 !important;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .email-labels {
+    
+    flex: 1; /* Allow email to shrink if needed */
+    min-width: 0; /* Allow text to shrink and not overflow */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ... if text is too long */
+    white-space: nowrap; /* No line breaks */
+  }
+  
+  .copy-email-button {
+    flex-shrink: 0;
+    padding: clamp(0.15rem, 0.5vh, 0.3rem) clamp(0.3rem, 1vw, 0.5rem);
+    font-size: clamp(0.55rem, 1.75vw, 0.8rem);
+    border-radius: 3px;
+    min-width: auto;
+    white-space: nowrap;
+    height: auto;
+    line-height: 1;
+  }
+  .copy-email-button svg {
+    font-size: clamp(0.7rem, 2.5vw, 1rem);
+  }
+  
+
+  .email-labels span,
+  .email-labels strong {
+    font-size: clamp(0.6rem, 2.75vw, 0.95rem);
+    padding: clamp(0.05rem, 0.25vh, 0.8rem) 
+           clamp(0.25rem, .1vw, 9.5rem); 
+    
+    word-break: break-word;
+    max-width: 90%;
+
+  }
+
+  .close-button {
+    margin-top: 1rem; /* Keeps space between the close button and content */
+    background: #fff;
+    color: #6c1cd5;
+    font-weight: bold;
+    padding: clamp(0.3rem, 1vh, 0.6rem) clamp(0.8rem, 3vw, 1.2rem);
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    text-align: center;
+    margin-bottom: 0.45rem;
+  }
+  
+  
 }
 
 

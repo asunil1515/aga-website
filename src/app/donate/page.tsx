@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { IoLogoVenmo } from "react-icons/io5";
 import { SiZelle } from "react-icons/si";
+import { FiClipboard } from "react-icons/fi";
 /*import { FaCcApplePay } from "react-icons/fa6";*/
 import Head from "next/head";
 import TopStart from "../components/TopStart";
@@ -13,7 +14,19 @@ import TopStart from "../components/TopStart";
 const DonatePage = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [contentAnimated, setContentAnimated] = useState(false);
+  const [showZelleModal, setShowZelleModal] = useState(false);
+  const toggleZelleModal = () => setShowZelleModal(!showZelleModal);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("give@amazinggrace.org");
+    setShowTooltip(true);
+    setTimeout(() => {
+      setShowTooltip(false);
+    }, 2000);
+  };  
   const handleDonateClick = () => {
     setContentAnimated(true);
     setTimeout(() => {
@@ -28,7 +41,7 @@ const DonatePage = () => {
         <link rel="preload" href="/BG1.jpg" as="image" />
       </Head>
       <Navbar />
-      <TopStart/>
+      <TopStart />
       <div className="donate-page">
         <Image
           alt="Donation Background"
@@ -94,30 +107,83 @@ const DonatePage = () => {
                     <IoLogoVenmo className="icon" />
                   </motion.button>
                 </a>
-                <a
-                  href="https://account.venmo.com/u/Amazing-Grace-27"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                >
+                {!showZelleModal ? (
                   <motion.button
                     className="option-button zelle"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+                    onClick={() => setShowZelleModal(true)}
                   >
                     <span className="button-text">Zelle</span>
                     <SiZelle className="icon" />
                   </motion.button>
-                </a>
+                ) : (
+<motion.div
+  className="zelle-modal"
+  initial={{ scale: 0.9, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{
+    duration: 0.6,
+    ease: [0.16, 1, 0.3, 1],
+  }}
+>
+  <div className="zelle-modal-header">
+    <span className="zelle-modal-title">Send with Zelle</span>
+    <p className="zelle-subtitle">*Our Zelle Email for each account*</p>
+  </div>
+
+  <div className="zelle-modal-content">
+    <div className="zelle-list">
+      {[
+        { label: "Church Main Account", email: "aga.assembly.1@gmail.com" },
+        { label: "Church Building Account", email: "aga.assembly.bld@gmail.com" },
+        { label: "Church FM Account", email: "aga.assembly.fm@gmail.com" },
+      ].map((item, index) => (
+        <div className="zelle-info" key={index} style={{ position: 'relative' }}>
+          <div className="email-labels">
+            <span>{item.label}:</span>
+            <strong>{item.email}</strong>
+          </div>
+          <motion.button
+            className="copy-email-button"
+            onClick={() => {
+              navigator.clipboard.writeText(item.email);
+              setCopiedIndex(index);
+              setTimeout(() => setCopiedIndex(null), 2200);
+            }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {copiedIndex === index ? "✔" : <FiClipboard />}
+          </motion.button>
+          {copiedIndex === index && <div className="tooltip">Copied!</div>}
+        </div>
+      ))}
+    </div>
+    <motion.button
+      className="close-button"
+      onClick={() => setShowZelleModal(false)}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      Close
+    </motion.button>
+  </div>
+</motion.div>
+
+
+
+
+
+                )}
                 <a
                   href="https://account.venmo.com/u/Amazing-Grace-27"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link"
                 >
-               
-               {/*   <motion.button
+                  {/*   <motion.button
                     className="option-button applepay"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -138,8 +204,6 @@ const DonatePage = () => {
 };
 
 export default DonatePage;
-
-
 
 /*"use client";
 import React, { useState } from "react";
